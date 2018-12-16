@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './view-profile.component.html',
   styleUrls: ['./view-profile.component.css']
 })
-export class ViewEmployerProfileComponent implements OnInit {
+export class ViewJobSeekerProfileComponent implements OnInit {
 
   constructor() { }
 
