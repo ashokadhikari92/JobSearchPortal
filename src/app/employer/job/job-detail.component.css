@@ -1,0 +1,16 @@
+.masthead{
+    height: 200px;
+  }
+
+  section .container{
+    min-height: 400px;
+  }
+
+  .info-detail{
+    border-bottom: 1px solid #cecaca;
+    background-color: #f5f4f4;
+    padding: 5px;
+  }
+  .create-job::parent {
+    width: 100%;
+}
