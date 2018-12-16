@@ -1,9 +1,14 @@
 <!-- Navigation -->
 <nav class="navbar navbar-light bg-light static-top">
   <div class="container">
-    <a [routerLink]="['']" class="navbar-brand">Our Job Search</a>
+    <a [routerLink]="['/home']" class="navbar-brand">Our Job Search</a>
 
   </div>
-  <a class="btn btn-primary" href="#" style="margin-right:10px;">Sign Up</a>
-  <a class="btn btn-success" href="#">LogIn</a>
+  <span *ngIf="isAuthenticated()">
+      <button  (click)="logout()" class="btn border-danger" >Logout</button>
+  </span>
+  <span *ngIf="!isAuthenticated()">
+      <a [routerLink]="['/signup']" class="btn border-primary" style="margin-right:10px;">Sign Up</a>
+      <a [routerLink]="['/login']" class="btn border-success" >LogIn</a>
+  </span>
 </nav>

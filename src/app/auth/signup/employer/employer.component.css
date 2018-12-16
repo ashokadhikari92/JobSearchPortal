@@ -1,0 +1,8 @@
+:host {
+  width: 100%;
+  display: flex;
+}
+
+.checkbox{
+  margin-right: 10px;
+}

@@ -1,0 +1,70 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- <h2 class="text-center text-white mb-4">Login Form</h2> -->
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+
+          <!-- form card login -->
+          <div class="card rounded-0">
+            <div class="card-header">
+              <h3 class="mb-0">Employer Sign Up</h3>
+            </div>
+            <div class="card-body">
+              <form class="form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <label for="uname1">First Name</label>
+                  <input type="text" class="form-control form-control-lg rounded-0" formControlName="firstName">
+                  <div class="invalid-feedback" *ngIf="signupForm.get('firstName').valid">Oops, you missed this one.</div>
+                </div>
+                <div class="form-group">
+                  <label for="uname1">Last Name</label>
+                  <input type="text" class="form-control form-control-lg rounded-0" formControlName="lastName">
+                  <div class="invalid-feedback" *ngIf="signupForm.get('lastName').valid">Oops, you missed this one.</div>
+                </div>
+                <div class="form-group">
+                  <label for="uname1">Email</label>
+                  <input type="text" class="form-control form-control-lg rounded-0" formControlName="email" autocomplete="username">
+                  <div class="invalid-feedback" *ngIf="signupForm.get('email').valid">Oops, you missed this one.</div>
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control form-control-lg rounded-0" formControlName="password" autocomplete="new-password" >
+                  <div class="invalid-feedback" *ngIf="signupForm.get('password').valid">Oops, you missed this one.</div>
+                </div>
+
+                <div class="form-group">
+                  <label>Confirm Password</label>
+                  <input type="password" class="form-control form-control-lg rounded-0" formControlName="confirmPassword" autocomplete="new-password">
+                  <div class="invalid-feedback" *ngIf="signupForm.get('confirmPassword').valid">Confirm your password!</div>
+                </div>
+
+                <div>
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="checkbox" formControlName="accept">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description small text-dark">I accept the Terms  of Use & Privacy Policy.</span>
+                  </label>
+              </div>
+
+                <button type="submit" class="btn btn-primary btn-lg float-left" id="btnLogin" [disabled]="!signupForm.valid">Sign Up</button>
+              </form>
+
+            </div>
+            <span>If your are job seeker <a [routerLink] = "['/signup']" > signup here</a></span>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+
+        </div>
+
+
+      </div>
+      <!--/row-->
+
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->
