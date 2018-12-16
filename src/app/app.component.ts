@@ -17,4 +17,10 @@ export class AppComponent {
     }
     return false;
   }
+  isEmployeePage(){
+    if (this.router.url === '/employer') {
+      return true;
+    }
+    return false;
+  }
 }
