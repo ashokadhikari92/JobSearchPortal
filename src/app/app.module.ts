@@ -14,7 +14,7 @@ import { CreateNewJobComponent } from './employer/job/create-new-job.component';
 import { AddProfileComponent } from './employer/profile/add-profile.component';
 import { ViewProfileComponent } from './employer/profile/view-profile.component';
 import { JobDetailComponent } from './employer/job/job-detail.component';
-
+import { HeaderEmpComponent } from './employer/header/header.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { JobDetailComponent } from './employer/job/job-detail.component';
     CreateNewJobComponent,
     AddProfileComponent,
     ViewProfileComponent,
-    JobDetailComponent
+    JobDetailComponent,
+    HeaderEmpComponent
     
   ],
   imports: [
