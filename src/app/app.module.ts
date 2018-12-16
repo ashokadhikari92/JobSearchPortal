@@ -11,10 +11,14 @@ import { HeaderComponent } from './job-seeker/header/header.component';
 import { EmployerHomeComponent } from './employer/home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CreateNewJobComponent } from './employer/job/create-new-job.component';
-import { AddProfileComponent } from './employer/profile/add-profile.component';
-import { ViewProfileComponent } from './employer/profile/view-profile.component';
+import { AddEmployerProfileComponent } from './employer/profile/add-profile.component';
+import { ViewEmployerProfileComponent } from './employer/profile/view-profile.component';
 import { JobDetailComponent } from './employer/job/job-detail.component';
 import { HeaderEmpComponent } from './employer/header/header.component';
+import { AddJobSeekerProfileComponent } from './job-seeker/add-profile/add-profile.component';
+import { ViewJobSeekerProfileComponent } from './job-seeker/view-profile/view-profile.component';
+import { JobListComponent } from './common/job-list/job-list.component';
+import { MyJobsComponent } from './job-seeker/my-jobs/my-jobs.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +29,14 @@ import { HeaderEmpComponent } from './employer/header/header.component';
     HeaderComponent,
     EmployerHomeComponent,
     CreateNewJobComponent,
-    AddProfileComponent,
-    ViewProfileComponent,
+    AddEmployerProfileComponent,
+    ViewEmployerProfileComponent,
     JobDetailComponent,
-    HeaderEmpComponent
-    
+    HeaderEmpComponent,
+    AddJobSeekerProfileComponent,
+    ViewJobSeekerProfileComponent,
+    JobListComponent,
+    MyJobsComponent
   ],
   imports: [
     BrowserModule,
