@@ -7,7 +7,12 @@ const seekerProfile = {
   email: { type: String },
   phone: { type: String },
   countary: { type: String },
-  location: { type: String },
+  location: {
+    street: { type: String},
+    city: { type: String},
+    state: { type: String},
+    zipCode: { type: Number}
+   },
   educationLevel: { type: String },
   latestJobLevel: { type: String },
   workExperience: { type: Number },

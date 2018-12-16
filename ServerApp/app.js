@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config()
 
-var gradesRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
+const seekerRouter = require('./routes/seeker');
+const employerRouter = require('./routes/employer');
 const cors = require('cors');
 const mongoose = require("mongoose");
 
@@ -27,7 +29,9 @@ mongoose.connect(process.env.DB_URL)
 })
 
 
-app.use('/api/users', gradesRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/seekers', seekerRouter);
+app.use('/api/employers', employerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
