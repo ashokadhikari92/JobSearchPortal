@@ -2,11 +2,21 @@ import { HomeComponent } from './job-seeker/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployerHomeComponent } from './employer/home/home.component';
-
+import { LoginComponent } from './auth/login/login.component';
+import { SeekerSignupComponent } from './auth/signup/seeker/seeker.component';
+import { EmployerSignupComponent } from './auth/signup/employer/employer.component';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { SeekerGuard } from './auth/guards/seeker.guard';
+import { EmployerGuard } from './auth/guards/employer.guard';
+import { HomeGuard } from './auth/guards/home.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'employer', component: EmployerHomeComponent}
+  { path: 'home', component: HomeComponent, canActivate: [HomeGuard]},
+  { path: 'employer', component: EmployerHomeComponent, canActivate: [AuthGuard, EmployerGuard]},
+  { path: 'login', component: LoginComponent},
+  { path: 'signup', component: SeekerSignupComponent},
+  { path: 'employer/signup', component: EmployerSignupComponent}
 ];
 
 @NgModule({
