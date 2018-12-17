@@ -12,10 +12,11 @@ import { HomeGuard } from './auth/guards/home.guard';
 import { CreateNewJobComponent } from './employer/job/create-new-job.component';
 import { AddEmployerProfileComponent } from './employer/profile/add-profile.component';
 import { ViewEmployerProfileComponent } from './employer/profile/view-profile.component';
-import { JobDetailComponent } from './employer/job/job-detail.component';
+import { JobDetailListComponent } from './employer/job/job-detail-List.component';
 import { AddJobSeekerProfileComponent } from './job-seeker/profile/add-profile.component';
 import { MyJobsComponent } from './job-seeker/my-jobs/my-jobs.component';
 import { ViewJobSeekerProfileComponent } from './job-seeker/profile/view-profile.component';
+import { CandidateDetailComponent } from './employer/job/candidate-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -25,12 +26,13 @@ const routes: Routes = [
   { path: 'signup', component: SeekerSignupComponent},
   { path: 'employer/signup', component: EmployerSignupComponent},
   { path: 'employer/job', component: CreateNewJobComponent},
-  { path: 'employer/job/detail', component: JobDetailComponent},
+  { path: 'employer/job/detail', component: JobDetailListComponent},
   { path: 'employer/profile', component: AddEmployerProfileComponent},
   { path: 'employer/profile/viewProfile', component: ViewEmployerProfileComponent},
   { path: 'job-seeker/myjobs', component: MyJobsComponent},
   { path: 'job-seeker/add/profile', component: AddJobSeekerProfileComponent},
-  { path: 'job-seeker/view/profile', component: ViewJobSeekerProfileComponent}
+  { path: 'job-seeker/view/profile', component: ViewJobSeekerProfileComponent},
+  { path: 'employer/candidate/detail' , component: CandidateDetailComponent}
 ];
 
 @NgModule({

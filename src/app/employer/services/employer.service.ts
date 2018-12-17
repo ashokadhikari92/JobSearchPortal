@@ -15,4 +15,14 @@ export class EmployerService {
  addJob(jobForm){
    return this.http.post('http://localhost:3600/api/employers/job/add',jobForm);
  }
+
+ getJobDetailById(jobId){
+  return this.http.get('http://localhost:3600/api/employers/job/'+jobId);
+}
+
+
+ getCandidateById(candidateId){
+  return this.http.get('http://localhost:3600/api/employers/candidate/detail/'+candidateId);
+}
+
 }
