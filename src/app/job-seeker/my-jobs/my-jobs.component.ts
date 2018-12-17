@@ -12,11 +12,9 @@ export class MyJobsComponent implements OnInit {
   constructor(private jobSeekerService : JsdataService) { }
 
   ngOnInit() {
-    
     return this.jobSeekerService.loadMyJobs().subscribe(
       response => {
-        this.jobs = response.data;  
-        
+        this.jobs = response['data'];
       });
   }
 

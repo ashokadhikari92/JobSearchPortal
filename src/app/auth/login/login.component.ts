@@ -44,11 +44,12 @@ export class LoginComponent {
         .login(login)
         .subscribe(
           response => {
+            this.loaderService.stopLoader();
             this.authService.loginSuccess(response);
             this.router.navigate(['/home']);
             console.log(response);
           },
-          error => console.log(error),
+          error => {console.log(error); this.loaderService.stopLoader();},
           () => { this.loaderService.stopLoader(); }
         );
     }

@@ -8,6 +8,7 @@ require('dotenv').config()
 const usersRouter = require('./routes/users');
 const seekerRouter = require('./routes/seeker');
 const employerRouter = require('./routes/employer');
+const resumeRouter = require('./routes/resume');
 const cors = require('cors');
 const mongoose = require("mongoose");
 
@@ -32,6 +33,8 @@ mongoose.connect(process.env.DB_URL)
 app.use('/api/users', usersRouter);
 app.use('/api/seekers', seekerRouter);
 app.use('/api/employers', employerRouter);
+
+app.use('/', resumeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

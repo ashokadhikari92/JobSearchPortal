@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
@@ -25,6 +26,10 @@ import { JobDetailComponent } from './common/job-detail/job-detail.component';
 import { CandidateDetailComponent } from './employer/job/candidate-detail.component';
 import { LoaderComponent } from './_partials/loader/loader.component';
 
+import { FileSelectDirective } from 'ng2-file-upload';
+import { seekerProfileReducer } from './job-seeker/store/profile.reducers';
+import { employerProfileReducer } from './employer/store/profile.reducers';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,14 +49,16 @@ import { LoaderComponent } from './_partials/loader/loader.component';
     MyJobsComponent,
     JobDetailListComponent,
     CandidateDetailComponent,
-    LoaderComponent
+    LoaderComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({seekerProfile: seekerProfileReducer, employerProfile: employerProfileReducer})
   ],
   providers: [EmployerService],
   bootstrap: [AppComponent]

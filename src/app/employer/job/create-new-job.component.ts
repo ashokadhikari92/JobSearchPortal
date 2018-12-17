@@ -17,16 +17,16 @@ import { EmployerService } from './../services/employer.service';
 export class CreateNewJobComponent implements OnInit {
   private createJobForm : FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private employerService : EmployerService) { 
+  constructor(private formBuilder: FormBuilder, private employerService : EmployerService) {
 
     this.createJobForm = formBuilder.group({
       jobTitle: ['', [Validators.required]],
-      noOfPosition: ['', [Validators.required], this.NoOfPositionValidator],
+      noOfPosition: ['', [Validators.required]],
       minSalary: ['', [Validators.required]],
       maxSalary: ['', [Validators.required]],
       employeeType: ['', [Validators.required]],
       jobDescription: ['', [Validators.required]],
-      deadline : ['', [Validators.required]]         
+      deadline : ['', [Validators.required]]
     });
 
   }
@@ -51,14 +51,14 @@ export class CreateNewJobComponent implements OnInit {
       maxSalary: this.createJobForm.value.maxSalary,
       employeeType: this.createJobForm.value.employeeType,
       jobDescription: this.createJobForm.value.jobDescription,
-      deadline : this.createJobForm.value.deadline,     
+      deadline : this.createJobForm.value.deadline,
 
     };
   console.log("jobForm submit");
     this.employerService
         .addJob(jobForm)
         .subscribe(
-          response => {           
+          response => {
             console.log(response);
           },
           error => console.log(error)
@@ -68,14 +68,14 @@ export class CreateNewJobComponent implements OnInit {
 
 
   ngOnInit() {
-    
+
   }
 
   NoOfPositionValidator(control: FormControl): any {
     if(control.value.match(/.*[^0-9].*/)){
       return { 'invalid' : true};
   }
-    
+
     return null;
   }
 
