@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployerService } from './employer/services/employer.service';
 import { JobDetailComponent } from './common/job-detail/job-detail.component';
 import { CandidateDetailComponent } from './employer/job/candidate-detail.component';
+import { LoaderComponent } from './_partials/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CandidateDetailComponent } from './employer/job/candidate-detail.compon
     JobListComponent,
     MyJobsComponent,
     JobDetailListComponent,
-    CandidateDetailComponent    
+    CandidateDetailComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
