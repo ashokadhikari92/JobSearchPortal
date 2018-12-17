@@ -13,9 +13,9 @@ import { CreateNewJobComponent } from './employer/job/create-new-job.component';
 import { AddEmployerProfileComponent } from './employer/profile/add-profile.component';
 import { ViewEmployerProfileComponent } from './employer/profile/view-profile.component';
 import { JobDetailComponent } from './employer/job/job-detail.component';
-import { AddJobSeekerProfileComponent } from './job-seeker/add-profile/add-profile.component';
+import { AddJobSeekerProfileComponent } from './job-seeker/profile/add-profile.component';
 import { MyJobsComponent } from './job-seeker/my-jobs/my-jobs.component';
-import { ViewJobSeekerProfileComponent } from './job-seeker/view-profile/view-profile.component';
+import { ViewJobSeekerProfileComponent } from './job-seeker/profile/view-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'employer/job', component: CreateNewJobComponent},
   { path: 'employer/job/detail', component: JobDetailComponent},
   { path: 'employer/profile', component: AddEmployerProfileComponent},
-  { path: 'employer/profile/viewProfile', component: ViewEmployerProfileComponent}
+  { path: 'employer/profile/viewProfile', component: ViewEmployerProfileComponent},
   { path: 'job-seeker/myjobs', component: MyJobsComponent},
   { path: 'job-seeker/add/profile', component: AddJobSeekerProfileComponent},
   { path: 'job-seeker/view/profile', component: ViewJobSeekerProfileComponent}

@@ -75,7 +75,19 @@ router.get('/job/detail/:id', (req, res, next ) => {
 // Route to add profile
 router.post('/profile/add', (req, res, next) => {
 
+  const token = req.headers.authorization.split(" ")[1];
+  const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = tokenPayload.userId;
+
+  User.update({_id: userId}, {$set: { 'profile.user': req.body }},function(err){console.log(err)});
+  User.findOne({_id: userId}).then(user => {console.log(user)});
   return res.status(201)
+  .json({
+    message: "Profile added successfully."});
+  
+  //User.findOne({_id: userId}).then(user => {console.log(user)});
+  //console.log(tokenPayload);
+  /* return res.status(201)
   .json({
     message: "Profile added successfully.",
     data: {
@@ -100,11 +112,26 @@ router.post('/profile/add', (req, res, next) => {
       resume: ""
     }
   })
+  */
+  
 })
 
 // Route to view profile
 router.get('/profile/detail', (req, res, next) => {
-
+  let fetchedProfile;
+  const token = req.headers.authorization.split(" ")[1];
+  const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = tokenPayload.userId;
+  User.findOne({_id: userId}).then(user => {
+    console.log("Hello");
+    console.log(user);
+    return res.status(200).json({
+      data : user
+     });
+  });
+  
+  
+/*
   return res.status(200)
   .json({
     data: {
@@ -128,7 +155,7 @@ router.get('/profile/detail', (req, res, next) => {
       linkedinProfile: "",
       resume: ""
     }
-  })
+  })*/
 })
 
 // Route to apply to the job
