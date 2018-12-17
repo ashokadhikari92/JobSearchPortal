@@ -13,7 +13,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { CreateNewJobComponent } from './employer/job/create-new-job.component';
 import { AddEmployerProfileComponent } from './employer/profile/add-profile.component';
 import { ViewEmployerProfileComponent } from './employer/profile/view-profile.component';
-import { JobDetailComponent } from './employer/job/job-detail.component';
+import { JobDetailListComponent } from './employer/job/job-detail-List.component';
 import { HeaderEmpComponent } from './employer/header/header.component';
 import { AddJobSeekerProfileComponent } from './job-seeker/profile/add-profile.component';
 import { ViewJobSeekerProfileComponent } from './job-seeker/profile/view-profile.component';
@@ -21,6 +21,8 @@ import { JobListComponent } from './common/job-list/job-list.component';
 import { MyJobsComponent } from './job-seeker/my-jobs/my-jobs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployerService } from './employer/services/employer.service';
+import { JobDetailComponent } from './common/job-detail/job-detail.component';
+import { CandidateDetailComponent } from './employer/job/candidate-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { EmployerService } from './employer/services/employer.service';
     AddJobSeekerProfileComponent,
     ViewJobSeekerProfileComponent,
     JobListComponent,
-    MyJobsComponent    
+    MyJobsComponent,
+    JobDetailListComponent,
+    CandidateDetailComponent    
   ],
   imports: [
     BrowserModule,

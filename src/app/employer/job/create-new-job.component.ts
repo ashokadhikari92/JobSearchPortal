@@ -30,6 +30,19 @@ export class CreateNewJobComponent implements OnInit {
     });
 
   }
+
+  get jobTitle() { return this.createJobForm.get('jobTitle'); }
+
+  get noOfPosition() { return this.createJobForm.get('noOfPosition'); }
+
+  get minSalary() { return this.createJobForm.get('minSalary'); }
+
+  get maxSalary() { return this.createJobForm.get('maxSalary'); }
+
+  get jobDescription() { return this.createJobForm.get('jobDescription'); }
+
+  get deadline() { return this.createJobForm.get('deadline'); }
+
   onSubmit() {
     const jobForm = {
       jobTitle: this.createJobForm.value.jobTitle,

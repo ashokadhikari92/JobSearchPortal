@@ -39,22 +39,16 @@ router.get('/jobs', (req, res, next) => {
 // Job detail
 router.get('/job/:id', (req, res, next) => {
 
-  return res.status(200)
-    .json({
-      title: "",
-      numberOfPotition: "",
-      salaryRange: {
-        min: "",
-        max: ""
-      },
-      publishedDate: "",
-      description: "",
-      deadline: "",
-      status: "",
-      candidates: [{
+  let jobId = req.params.id;
 
-      }]
-    })
+  Job.findOne({_id: jobId}).then(job => {
+    console.log("job " + jobId);
+    console.log(job);
+    return res.status(200).json({
+      data : job
+     });
+  });
+
 })
 
 
@@ -84,11 +78,12 @@ router.post('/profile/add', (req, res, nex) => {
   console.log(companyProfile.name);
 
   User.update({ _id: userId }, { $set: { 'profile.company': companyProfile } }, function (err, doc) {
-    console.log(doc);
+    //console.log(doc);
     return res.status(201)
       .json({
         message: "Profile added successfully.",
-        data: {
+        data: doc
+       /* data: {
           companyName: req.body.companyName,
           website: req.body.website,
           contactEmail: req.body.email,
@@ -100,6 +95,7 @@ router.post('/profile/add', (req, res, nex) => {
           state: req.body.state,
           zipCode: req.body.zipCode
         }
+        */
       })
   })
 })
@@ -183,6 +179,14 @@ router.post('/job/add', (req, res, next) => {
 // View Candidate detail
 router.get('/candidate/detail/:id', (req, res, next) => {
 
+  const userId = req.params.id;
+  User.findOne({_id: userId}).then(user => {   
+    console.log(user);
+    return res.status(200).json({
+      data : user
+     });
+  });
+/*
   return res.status(200)
     .json({
       data: {
@@ -207,6 +211,7 @@ router.get('/candidate/detail/:id', (req, res, next) => {
         resume: ""
       }
     })
+    */
 })
 
 
