@@ -15,10 +15,11 @@ import { AddEmployerProfileComponent } from './employer/profile/add-profile.comp
 import { ViewEmployerProfileComponent } from './employer/profile/view-profile.component';
 import { JobDetailComponent } from './employer/job/job-detail.component';
 import { HeaderEmpComponent } from './employer/header/header.component';
-import { AddJobSeekerProfileComponent } from './job-seeker/add-profile/add-profile.component';
-import { ViewJobSeekerProfileComponent } from './job-seeker/view-profile/view-profile.component';
+import { AddJobSeekerProfileComponent } from './job-seeker/profile/add-profile.component';
+import { ViewJobSeekerProfileComponent } from './job-seeker/profile/view-profile.component';
 import { JobListComponent } from './common/job-list/job-list.component';
 import { MyJobsComponent } from './job-seeker/my-jobs/my-jobs.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { MyJobsComponent } from './job-seeker/my-jobs/my-jobs.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
