@@ -20,6 +20,7 @@ import { ViewJobSeekerProfileComponent } from './job-seeker/profile/view-profile
 import { JobListComponent } from './common/job-list/job-list.component';
 import { MyJobsComponent } from './job-seeker/my-jobs/my-jobs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployerService } from './employer/services/employer.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AddJobSeekerProfileComponent,
     ViewJobSeekerProfileComponent,
     JobListComponent,
-    MyJobsComponent
+    MyJobsComponent    
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [EmployerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

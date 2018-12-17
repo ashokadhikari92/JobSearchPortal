@@ -6,8 +6,13 @@ const seekerProfile = {
   lastName: { type: String },
   email: { type: String },
   phone: { type: String },
-  country: { type: String },
-  location: { type: String },
+  countary: { type: String },
+  location: { 
+      street: { type: String},
+      city: { type: String},
+      state: { type: String},
+      zipCode: { type: Number}
+   },
   educationLevel: { type: String },
   latestJobLevel: { type: String },
   workExperience: { type: Number },
@@ -38,6 +43,5 @@ const jobSchema = mongoose.Schema({
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref:'User'}
 });
 
-userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("Job", jobSchema);
