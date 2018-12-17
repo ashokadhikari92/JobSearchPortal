@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator/check");
 const User = require("./../models/user");
+const Job = require("./../models/job");
 const checkAuth = require("./../middleware/check-authentication");
 
 
@@ -60,22 +61,47 @@ router.get('/job/:id', (req, res, next) => {
 // Add company profile
 router.post('/profile/add', (req, res, nex) => {
 
-  return res.status(201)
-    .json({
-      message: "Profile added successfully.",
-      data: {
-        companyName: "",
-        website: "",
-        contactEmail: "",
-        phone: "",
-        introduction: "",
-        typeOfBusiness: "",
-        street: "",
-        city: "",
-        state: "",
-        zipCode: ""
-      }
-    })
+
+  const token = req.headers.authorization.split(" ")[1];
+  const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = tokenPayload.userId;
+  let fetchedUser;
+
+  const companyProfile = {
+    name: req.body.companyName,
+    website: req.body.website,
+    contactEmail: req.body.email,
+    contactPhone: req.body.contactNo,
+    introduction: req.body.introduction,
+    address: {
+      street: req.body.street,
+      city: req.body.city,
+      state: req.body.state,
+      zipCode: req.body.zip
+    }
+  };
+
+  console.log(companyProfile.name);
+
+  User.update({ _id: userId }, { $set: { 'profile.company': companyProfile } }, function (err, doc) {
+    console.log(doc);
+    return res.status(201)
+      .json({
+        message: "Profile added successfully.",
+        data: {
+          companyName: req.body.companyName,
+          website: req.body.website,
+          contactEmail: req.body.email,
+          phone: req.body.contactNo,
+          introduction: req.body.introduction,
+          typeOfBusiness: req.body.typeOfBusiness,
+          street: req.body.street,
+          city: req.body.city,
+          state: req.body.state,
+          zipCode: req.body.zipCode
+        }
+      })
+  })
 })
 
 
@@ -105,21 +131,52 @@ router.get('/profile/detail', (req, res, next) => {
 // Add new Job
 router.post('/job/add', (req, res, next) => {
 
-  return res.status(201)
-    .json({
-      message: "Successfully added job.",
-      data: {
-        title: "",
-        numberOfPotition: "",
-        salaryRange: {
-          min: "",
-          max: ""
+  const token = req.headers.authorization.split(" ")[1];
+  const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = tokenPayload.userId;
+  User.findOne({ _id: userId })
+    .then(user => {
+      console.log("User ", user);
+      const newJob = {
+        title: req.body.jobTitle,
+        description: req.body.jobDescription,
+        company: user.profile.company.name,
+        numberOfPosition: req.body.noOfPosition,
+        deadline: req.body.deadline,
+        location: {
+          city: user.profile.company.address.city,
+          state: user.profile.company.address.state,
         },
-        description: "",
-        deadline: "",
-        employeeType: ""
-      }
+        salaryRange: {
+          min: req.body.minSalary,
+          max: req.body.maxSalary
+        },
+        publishedDate: Date.now(),
+        employeeType: req.body.employeeType
+      };
+
+      const job = new Job(newJob);
+
+      job.save()
+        .then((result) => {
+          return res.status(201)
+            .json({
+              message: "Successfully added job.",
+              data: result
+            })
+        })
+        .catch((error) => {
+          return res.status(500)
+            .json({
+              error: error
+            })
+        });
+
     })
+
+
+
+
 })
 
 
@@ -144,7 +201,7 @@ router.get('/candidate/detail/:id', (req, res, next) => {
         currentJobTitle: "",
         workExperience: "",
         skillSets: [
-          { name: ""}, { name: ""}
+          { name: "" }, { name: "" }
         ],
         linkedinProfile: "",
         resume: ""
