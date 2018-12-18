@@ -25,4 +25,13 @@ export class EmployerService {
   return this.http.get('http://localhost:3600/api/employers/candidate/detail/'+candidateId);
 }
 
+
+getEmployerProfile(){
+  return this.http.get('http://localhost:3600/api/employers/profile/detail/');
+}
+
+getJobsByEmployer(){
+  return this.http.get('http://localhost:3600/api/employers/jobs');
+}
+
 }
