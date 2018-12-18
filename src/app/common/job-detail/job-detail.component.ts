@@ -28,7 +28,7 @@ export class JobDetailComponent implements OnInit {
       let jobId = param.id;
       console.log(jobId);
 
-      this.employerService
+      this.jobSeekerService
         .getJobDetailById(jobId)
         .subscribe(
           response => {

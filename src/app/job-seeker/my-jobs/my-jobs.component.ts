@@ -15,7 +15,12 @@ export class MyJobsComponent implements OnInit {
     return this.jobSeekerService.loadMyJobs().subscribe(
       response => {
         this.jobs = response['data'];
-      });
+        console.log(this.jobs);
+      },
+      (err) => {
+        console.log("Error in data loading: ", err);
+      }
+    );
   }
 
 }

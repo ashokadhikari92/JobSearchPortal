@@ -1,6 +1,3 @@
-<!-- Navigation -->
-
-
 <div class="job-nav d-flex flex-column flex-md-row align-items-center navbar navbar-expand-lg">
   <div class="container">
     <a [routerLink]="['/home']" class="navbar-brand">
@@ -13,32 +10,27 @@
             <nav class="my-2 my-md-0 mr-md-3">
               <span *ngIf="isEmployeePage()">
                 <a class="p-2 text-dark" [routerLink]="['employer']">Home</a>
-                <!-- <a class="p-2 text-dark" [routerLink]="['employer/profile']">Add/Edit Profile</a> -->
                 <a class="p-2 text-dark" [routerLink]="['employer/job']">Post New Job</a>
               </span>
-      <span *ngIf="isSeekerPage()">
+    <span *ngIf="isSeekerPage()">
             <a class="p-2 text-dark" [routerLink]="['']">Home</a>
-            <!-- <a class="p-2 text-dark" [routerLink]="['/job-seeker/profile']">Add/Edit Profile</a> -->
-            <a class="p-2 text-dark" [routerLink]="['job-seeker/myjobs']">Applied jobs</a>
+            <a class="p-2 text-dark" [routerLink]="['/myjobs']">Applied jobs</a>
       </span>
     </nav>
     </span>
-    <!-- <span *ngIf="isAuthenticated()">
-                <button  (click)="logout()" class="btn border-danger" >Logout</button>
-            </span> -->
+
     <span *ngIf="!isAuthenticated()">
         <a [routerLink]="['/signup']" class="btn border-primary" style="margin-right:10px;">Sign Up</a>
         <a [routerLink]="['/login']" class="btn border-success" >LogIn</a>
     </span>
 
     <ul class="navbar-nav " *ngIf="isAuthenticated()">
-      <!-- PROFILE DROPDOWN - scrolling off the page to the right -->
       <li class="nav-item dropdown" *ngIf="isSeekerPage()">
         <a href="#" class="nav-link dropdown-toggle" id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ (seekerProfile | async)?.profile.firstName }}
             </a>
         <div class="dropdown-menu" aria-labelledby="navDropDownLink" style="left:-40px;">
-          <a class="dropdown-item" [routerLink]="['/job-seeker/profile']">Update Profile</a>
+          <a class="dropdown-item" [routerLink]="['/profile']">Update Profile</a>
           <div class="dropdown-divider"></div>
           <button (click)="logout()" class="dropdown-item">Logout</button>
         </div>
@@ -46,15 +38,15 @@
 
 
       <li class="nav-item dropdown" *ngIf="isEmployeePage()">
-          <a href="#" class="nav-link dropdown-toggle" id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a href="#" class="nav-link dropdown-toggle" id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ (employerProfile | async)?.profile.fullName }}
               </a>
-          <div class="dropdown-menu" aria-labelledby="navDropDownLink" style="left:-40px;">
-            <a class="dropdown-item" [routerLink]="['/employer/profile']">Update Profile</a>
-            <div class="dropdown-divider"></div>
-            <button (click)="logout()" class="dropdown-item">Logout</button>
-          </div>
-        </li>
+        <div class="dropdown-menu" aria-labelledby="navDropDownLink" style="left:-40px;">
+          <a class="dropdown-item" [routerLink]="['/employer/profile']">Update Profile</a>
+          <div class="dropdown-divider"></div>
+          <button (click)="logout()" class="dropdown-item">Logout</button>
+        </div>
+      </li>
     </ul>
   </div>
 
