@@ -9,17 +9,18 @@ import { EmployerService } from './../../employer/services/employer.service';
 })
 export class JobDetailListComponent implements OnInit {
 
+ data;
   constructor(private employerService : EmployerService,route: ActivatedRoute) { 
 
     route.params.subscribe(param => {
       let jobId =  param.id;
      
-    let data;
+  
     this.employerService
     .getJobDetailById(jobId)    
     .subscribe(
       response => {
-          data = response['data']['candidates'];  
+          this.data = response['data']['candidates'];  
           
           
           // this.name = data['data']['company'];
@@ -29,7 +30,7 @@ export class JobDetailListComponent implements OnInit {
           // this.maxSalary = data['data']['salaryRange']['max'];
           // this.employeeType = data['data']['employeeType'];
           // this.jobDescription = data['data']['description'];
-          console.log( "data" + data);  
+          console.log( "data...." + response);  
       },
       error => console.log(error)
     );

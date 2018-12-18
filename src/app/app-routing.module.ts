@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'employer/profile/viewProfile', component: ViewEmployerProfileComponent},
   { path: 'job-seeker/myjobs', component: MyJobsComponent},
   { path: 'job-seeker/profile', component: AddJobSeekerProfileComponent},
-  { path: 'employer/candidate/detail' , component: CandidateDetailComponent}
+  { path: 'employer/candidate/detail/:id' , component: CandidateDetailComponent}
 ];
 
 @NgModule({

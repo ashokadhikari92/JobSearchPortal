@@ -1,14 +1,42 @@
 <!-- Navigation -->
-<nav class="navbar navbar-light bg-light static-top">
-  <div class="container">
-    <a [routerLink]="['/home']" class="navbar-brand">Our Job Search</a>
 
+
+<div class="job-nav d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <a [routerLink]="['/home']" class="navbar-brand">
+     
+    </a>  
+  <h5 class="my-0 mr-md-auto font-weight-normal"></h5>
+    
+  
+    <span *ngIf="isAuthenticated()">
+    <nav class="my-2 my-md-0 mr-md-3">
+      <span *ngIf="isEmployeePage()">
+        <a class="p-2 text-dark" [routerLink]="['employer']">Home</a>
+        <a class="p-2 text-dark" [routerLink]="['employer/profile']">Add/Edit Profile</a>
+        <a class="p-2 text-dark" [routerLink]="['employer/job']">Post New Job</a>      
+      </span>
+      <span *ngIf="isSeekerPage()">
+          <a class="p-2 text-dark" [routerLink]="['']">Home</a>
+          <a class="p-2 text-dark" [routerLink]="['/job-seeker/profile']">Add/Edit Profile</a>
+          <a class="p-2 text-dark" [routerLink]="['job-seeker/myjobs']">Applied jobs</a>  
+      </span>
+    </nav>
+    </span> 
+    <span *ngIf="isAuthenticated()">
+        <button  (click)="logout()" class="btn border-danger" >Logout</button>
+    </span>
+    <span *ngIf="!isAuthenticated()">
+        <a [routerLink]="['/signup']" class="btn border-primary" style="margin-right:10px;">Sign Up</a>
+        <a [routerLink]="['/login']" class="btn border-success" >LogIn</a>
+    </span>
   </div>
-  <span *ngIf="isAuthenticated()">
-      <button  (click)="logout()" class="btn border-danger" >Logout</button>
-  </span>
-  <span *ngIf="!isAuthenticated()">
-      <a [routerLink]="['/signup']" class="btn border-primary" style="margin-right:10px;">Sign Up</a>
-      <a [routerLink]="['/login']" class="btn border-success" >LogIn</a>
-  </span>
-</nav>
+
+
+
+  
+  
+  
+ 
+    
+
+
