@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JsdataService } from './../../job-seeker/services/jsdata.service';
 
 @Component({
   selector: 'app-my-jobs',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyJobsComponent implements OnInit {
 
-  constructor() { }
+  jobs;
+  constructor(private jobSeekerService : JsdataService) { }
 
   ngOnInit() {
+    
+    return this.jobSeekerService.loadMyJobs().subscribe(
+      response => {
+        this.jobs = response.data;  
+        
+      });
   }
 
 }
