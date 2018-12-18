@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
     
     return this.jobSeekerService.loadJobs().subscribe(
       response => {
-        this.jobs = response.data;  
+        this.jobs = response['data'];  
         
       });
   }

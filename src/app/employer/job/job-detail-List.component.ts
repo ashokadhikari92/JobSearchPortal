@@ -20,7 +20,7 @@ export class JobDetailListComponent implements OnInit {
     .getJobDetailById(jobId)    
     .subscribe(
       response => {
-          this.data = response.data.candidates;  
+          this.data = response['data']['candidates'];  
           
           
           // this.name = data['data']['company'];
