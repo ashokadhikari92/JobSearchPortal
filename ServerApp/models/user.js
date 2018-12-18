@@ -17,7 +17,9 @@ const seekerProfile = {
   latestJobLevel: { type: String },
   workExperience: { type: Number },
   linkedinProfile: { type: String },
-  skillSet: [{type: String}]
+  skillSet: [{
+    name: {type: String}
+  }]
 }
 
 const companyProfile = {

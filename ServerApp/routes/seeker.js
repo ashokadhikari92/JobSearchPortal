@@ -53,8 +53,16 @@ router.post('/profile/add', (req, res, next) => {
   const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
   const userId = tokenPayload.userId;
 
-  User.update({_id: userId}, {$set: { 'profile.user': req.body }},function(err){console.log(err)});
-  //User.findOne({_id: userId}).then(user => {console.log(user)});
+  const profile = req.body;
+  const skillSets = profile.skillSet.map((value) => {
+    return {name: value};
+  });
+
+  profile.skillSet = skillSets;
+  console.log(profile);
+
+  User.update({_id: userId}, {$set: { 'profile.user': profile }},function(err){console.log(err)});
+  // //User.findOne({_id: userId}).then(user => {console.log(user)});
   return res.status(201)
   .json({
     message: "Profile added successfully."});
@@ -140,7 +148,12 @@ router.get('/job/apply/:jobId', (req, res, next) => {
   const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
   const userId = tokenPayload.userId;
   User.findOne({_id: userId}).then(user => {
+    const skillSets = user.profile.user.skillSet.map((skill) => {
+      return { name: skill.name}
+    });
+
      candidate = {
+      candidateId: user._id,
       firstName : user.firstName,
       lastName : user.lastName,
       phone : user.email,
@@ -155,12 +168,16 @@ router.get('/job/apply/:jobId', (req, res, next) => {
     latestJobLevel: user.latestJobLevel,
     workExperience: user.workExperience,
     linkedinProfile: user.linkedinProfile,
-    skillSet: [user.skillSet]
+    skillSet: skillSets
     };
-
+    // Job.findOne({candidates: { "$in" : [user.]} }).then(job => {
+    //   console.log("Hello");
+    //   console.log(user)
+    //   return res.status(200).json({
+    //     data : user
+    //    });
+    // });
     Job.update({_id: jobId}, {$push: { 'candidates': candidate }},function(err){console.log(err)});
-
-    
     
   });
   
