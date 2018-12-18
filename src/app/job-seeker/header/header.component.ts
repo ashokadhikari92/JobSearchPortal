@@ -1,3 +1,4 @@
+import { FilterService } from '../services/filter.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  title = '';
+  location = '';
 
-  constructor() { }
+  constructor(private filterService: FilterService) { }
 
   ngOnInit() {
   }
 
+  filterJob(){
+    const filters ={
+      title: this.title,
+      location: this.location
+    }
+    this.filterService.filterJob(filters);
+  }
 }

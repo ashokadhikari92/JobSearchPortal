@@ -15,12 +15,19 @@ export class JsdataService {
     return this.http.get('http://localhost:3600/api/seekers/profile/detail');
   }
   applyJob(jobId){
-    return this.http.get('http://localhost:3600/api/seekers/job/apply/'+jobId);
+    return this.http.get('http://localhost:3600/api/seekers/job/apply/' + jobId);
   }
-  loadJobs(){
-    return this.http.get('http://localhost:3600/api/seekers/jobs');
+  loadJobs(filters = {}){
+    return this.http.get('http://localhost:3600/api/seekers/jobs', {params: filters});
   }
-  loadMyJobs(){
+  filterJobs(filters = {}) {
+    return this.http.get('http://localhost:3600/api/seekers/jobs/filter', {params: filters});
+  }
+  loadMyJobs() {
     return this.http.get('http://localhost:3600/api/seekers/jobs/applied');
+  }
+
+  getJobDetailById(jobId) {
+    return this.http.get('http://localhost:3600/api/seekers/job/' + jobId);
   }
 }

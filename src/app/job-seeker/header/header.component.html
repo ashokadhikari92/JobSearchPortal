@@ -7,19 +7,18 @@
         <h1 class="mb-5">Find job that best fit for you !!</h1>
       </div>
       <div class="col-md-10 col-lg-10 col-xl-10 mx-auto">
-        <form>
           <div class="form-row">
             <div class="col-12 col-md-5 mb-2 mb-md-0">
-              <input type="email" class="form-control form-control-lg" placeholder="Keywords or title">
+              <input type="text" [(ngModel)]="title" class="form-control form-control-lg" placeholder="Title">
             </div>
             <div class="col-12 col-md-5 mb-2 mb-md-0">
-              <input type="email" class="form-control form-control-lg" placeholder="Location ">
+              <input type="text" [(ngModel)]="location" class="form-control form-control-lg" placeholder="City, State ">
             </div>
             <div class="col-12 col-md-2">
-              <button type="submit" class="btn btn-block btn-lg btn-primary">Find Job</button>
+              <button class="btn btn-block btn-lg btn-primary" (click)="filterJob()">Find Job</button>
             </div>
           </div>
-        </form>
+
       </div>
     </div>
   </div>

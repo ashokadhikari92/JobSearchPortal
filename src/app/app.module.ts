@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { DefaultJobDetailComponent } from './job-seeker/job/job-detail.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
@@ -50,7 +52,8 @@ import { employerProfileReducer } from './employer/store/profile.reducers';
     JobDetailListComponent,
     CandidateDetailComponent,
     LoaderComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    DefaultJobDetailComponent
   ],
   imports: [
     BrowserModule,
