@@ -20,4 +20,7 @@ export class JsdataService {
   loadJobs(){
     return this.http.get('http://localhost:3600/api/seekers/jobs');
   }
+  loadMyJobs(){
+    return this.http.get('http://localhost:3600/api/seekers/jobs/applied');
+  }
 }

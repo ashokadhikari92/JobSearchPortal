@@ -20,31 +20,20 @@ router.get('/jobs', (req, res, next) => {
   });
 });
 
-// Route to fetch job detail
-router.get('/job/detail/:id', (req, res, next ) => {
+router.get('/jobs/applied', (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = tokenPayload.userId;
+  User.findOne({_id: userId}).then(user => {
+      Job.find({"candidates.candidateId": user._id}).then(jobs => {
+        return res.status(200).json({
+          data : jobs
+         });
+      });
+    });
+  
+});
 
-  return res.status(200)
-  .json({
-    data: {
-      title: "",
-      company: "",
-      location: {
-        city: "",
-        state: ""
-      },
-      numberOfPotition: "",
-      salaryRange: {
-        min: "",
-        max: ""
-      },
-      publishedDate: "",
-      description: "",
-      companyWebsite: "",
-      applied: "true/false",
-      deadline: ""
-    }
-  })
-})
 
 // Route to add profile
 router.post('/profile/add', (req, res, next) => {
@@ -67,35 +56,6 @@ router.post('/profile/add', (req, res, next) => {
   .json({
     message: "Profile added successfully."});
   
-  //User.findOne({_id: userId}).then(user => {console.log(user)});
-  //console.log(tokenPayload);
-  /* return res.status(201)
-  .json({
-    message: "Profile added successfully.",
-    data: {
-      firstName: "",
-      lastName: "",
-      country: "",
-      location: {
-        street: "",
-        city: "",
-        state: "",
-        zipCode: ""
-      },
-      educationLevel: "",
-      email: "",
-      phone: "",
-      currentJobTitle: "",
-      workExperience: "",
-      skillSets: [
-        { name: ""}, { name: ""}
-      ],
-      linkedinProfile: "",
-      resume: ""
-    }
-  })
-  */
-  
 })
 
 // Route to view profile
@@ -111,33 +71,7 @@ router.get('/profile/detail', (req, res, next) => {
       data : user
      });
   });
-  
-  
-/*
-  return res.status(200)
-  .json({
-    data: {
-      firstName: "",
-      lastName: "",
-      country: "",
-      location: {
-        street: "",
-        city: "",
-        state: "",
-        zipCode: ""
-      },
-      educationLevel: "",
-      email: "",
-      phone: "",
-      currentJobTitle: "",
-      workExperience: "",
-      skillSets: [
-        { name: ""}, { name: ""}
-      ],
-      linkedinProfile: "",
-      resume: ""
-    }
-  })*/
+
 })
 
 // Route to apply to the job
