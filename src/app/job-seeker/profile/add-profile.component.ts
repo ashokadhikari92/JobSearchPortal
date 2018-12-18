@@ -1,3 +1,4 @@
+import { LoaderService } from '../../_partials/services/loader.service';
 
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
@@ -6,8 +7,9 @@ import { phoneNumberValidator } from "./../validators/phone-validator";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";
 import { SeekerProfile } from "../profile.model";
-import * as ProfileActions from "../store/profile.actions";
-import * as fromProfile from "../store/profile.reducers";
+import * as ProfileActions from '../store/profile.actions';
+import * as fromProfile from '../store/profile.reducers';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 import {
   FormBuilder,
@@ -29,7 +31,9 @@ export class AddJobSeekerProfileComponent implements OnInit {
     private jsDataService: JsdataService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private store: Store<fromProfile.State>
+    private store: Store<fromProfile.State>,
+    private loader: LoaderService,
+    private flashMessage: FlashMessagesService
   ) {
     this.addProfile = formBuilder.group({
       firstName: ["", [Validators.required]],
@@ -84,12 +88,18 @@ export class AddJobSeekerProfileComponent implements OnInit {
       linkedinProfile: formValues.linkedinProfile
     };
 
+    this.loader.showLoader();
     this.jsDataService.addProfile(seeker).subscribe(
       response => {
         console.log(response);
+        this.loader.stopLoader();
         this.store.dispatch(new ProfileActions.SaveAllDetail(seeker));
+        this.flashMessage.show('Profile updated successfully.', { cssClass: 'alert-success' });
       },
-      error => console.log(error)
+      error => {
+        console.log(error); this.loader.stopLoader();
+        this.flashMessage.show('Failed to update profile.', { cssClass: 'alert-danger' });
+      }
     );
   }
 

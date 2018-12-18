@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { JsdataService } from '../services/jsdata.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 
 @Component({
   selector: "app-job-detail-list",
@@ -18,7 +20,8 @@ export class DefaultJobDetailComponent implements OnInit {
     private router: Router,
     private loader: LoaderService,
     route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private flashMessage: FlashMessagesService
   ) {
     route.params.subscribe(
       param => {
@@ -34,15 +37,15 @@ export class DefaultJobDetailComponent implements OnInit {
     this.loader.stopLoader();
     this.service.applyJob(this.jobId).subscribe(
       result => {
+        this.flashMessage.show('You successfully applied to the job.', {cssClass: 'alert-success'});
         this.loader.stopLoader();
-        console.log("Redirect");
         this.router.navigate(['/']);
       },
       (err) => {
+        this.flashMessage.show(err.error.message, {cssClass: 'alert-danger'});
         this.loader.stopLoader();
-        console.log("Redirect");
         console.log(err);
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
       }
     );
   }

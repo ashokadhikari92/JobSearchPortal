@@ -1,3 +1,4 @@
+import { LoaderService } from './../../_partials/services/loader.service';
 import { FilterService } from '../services/filter.service';
 import { Component, OnInit } from '@angular/core';
 import { JsdataService } from './../../job-seeker/services/jsdata.service';
@@ -11,10 +12,10 @@ export class HomeComponent implements OnInit {
   jobs = [];
   constructor(
     private jobSeekerService: JsdataService,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private loader: LoaderService
   ) {
     filterService.filterEvent$.on("filter", filters => {
-      console.log(filters);
       this.filterJobs(filters);
     });
   }
@@ -23,15 +24,31 @@ export class HomeComponent implements OnInit {
     this.loadJobs();
   }
 
-  private loadJobs(filters = {}){
-    return this.jobSeekerService.loadJobs(filters).subscribe(response => {
-      this.jobs = response["data"];
-    });
+  private loadJobs(filters = {}) {
+    this.loader.showLoader();
+    return this.jobSeekerService.loadJobs(filters).subscribe(
+      response => {
+        this.jobs = response["data"];
+        this.loader.stopLoader();
+      },
+      err => {
+        console.log(err);
+        this.loader.stopLoader();
+      }
+    );
   }
 
-  private filterJobs(filters = {}){
-    return this.jobSeekerService.filterJobs(filters).subscribe(response => {
-      this.jobs = response["data"];
-    });
+  private filterJobs(filters = {}) {
+    this.loader.showLoader();
+    return this.jobSeekerService.filterJobs(filters).subscribe(
+      response => {
+        this.jobs = response["data"];
+        this.loader.stopLoader();
+      },
+      err => {
+        console.log(err);
+        this.loader.stopLoader();
+      }
+    );
   }
 }

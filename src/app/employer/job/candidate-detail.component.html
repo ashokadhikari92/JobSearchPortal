@@ -1,7 +1,6 @@
 <div class="col-md-8 order-md-1 offset-md-2">
         <h4 class="mb-3">Candidate Profile</h4>
-      <form class="needs-validation" novalidate>
-        <div class="row">
+        <div class="row form-group">
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
            <div class="info-detail">{{firstName}}</div>
@@ -11,8 +10,8 @@
             <div class="info-detail">{{lastName}}</div>
           </div>
         </div>
-      
-        <div class="row">
+
+        <div class="row form-group">
           <div class="col-md-6 mb-3">
             <label for="email">Email</label>
             <div class="info-detail">{{email}}</div>
@@ -22,7 +21,7 @@
             <div class="info-detail">{{phone}}</div>
           </div>
         </div>
-        <div class="row">
+        <div class="row form-group">
           <div class="col-md-6 mb-3">
             <label for="country">Country</label>
             <div class="info-detail">{{country}}</div>
@@ -32,11 +31,11 @@
             <div class="info-detail">{{location}}</div>
           </div>
         </div>
-      
-        <div class="row">
+
+        <div class="row form-group">
           <div class="col-md-5 mb-3">
             <label for="education">Education Level</label>
-            <div class="info-detail">{{educationLevel}}</div>
+            <div class="info-detail label">{{educationLevel}}</div>
           </div>
           <div class="col-md-4 mb-3">
             <label for="job">Latest Job Position</label>
@@ -47,22 +46,19 @@
             <div class="info-detail">{{workExperience}}</div>
           </div>
         </div>
-      
-       
-      
-       <div class="row">
+
+       <div class="row form-group">
           <div class="col-md-6 mb-3">
             <label for="skills">Skills</label>
             <div class="info-detail"><span *ngFor="let skill of skillSet">{{ skill.name }}, </span> </div>
-            
           </div>
+       </div>
+       <div class="row form-group">
           <div class="col-md-6">
-            <label for="resume">LinkedIn Profile</label>
+            <label class="label" for="resume">LinkedIn Profile</label>
             <div class="info-detail">{{linkedinProfile}}</div>
-      
-            
+
+
           </div>
         </div>
-       
-       </form>
       </div>

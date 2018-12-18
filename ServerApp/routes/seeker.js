@@ -155,19 +155,20 @@ router.get("/job/apply/:jobId",checkAuth, checkSeeker, (req, res, next) => {
       firstName: user.firstName,
       lastName: user.lastName,
       phone: user.email,
-      country: user.country,
+      country: user.profile.user.country,
       location: {
-        street: user.location,
-        city: "default",
-        state: "default",
-        zipCode: 23214
+        street: user.profile.user.ocation,
+        city: "Fairfield",
+        state: "IA",
+        zipCode: 52557
       },
-      educationLevel: user.educationLevel,
-      latestJobLevel: user.latestJobLevel,
-      workExperience: user.workExperience,
-      linkedinProfile: user.linkedinProfile,
+      educationLevel: user.profile.user.educationLevel,
+      latestJobLevel: user.profile.user.latestJobLevel,
+      workExperience: user.profile.user.workExperience,
+      linkedinProfile: user.profile.user.linkedinProfile,
       skillSet: skillSets
     };
+    console.log(candidate);
     Job.findOne({ _id: req.params.jobId, "candidates.candidateId": user._id }).then(job => {
       if (job) {
         return res.status(403).json({
