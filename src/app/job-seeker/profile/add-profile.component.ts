@@ -59,7 +59,7 @@ export class AddJobSeekerProfileComponent implements OnInit {
       workExperience: formValues.workExperience,
       country: formValues.country,
       location: formValues.location,
-      skillSet: formValues.skillSet,
+      skillSet: formValues.skillSet.split(','),
       linkedinProfile: formValues.linkedinProfile
     };
    
