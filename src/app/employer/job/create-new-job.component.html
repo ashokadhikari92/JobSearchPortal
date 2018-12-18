@@ -8,11 +8,11 @@
         <input type="text" class="form-control" formControlName="jobTitle" id="jobTitle" placeholder="" value="" required>
         <div *ngIf="jobTitle.invalid && (jobTitle.dirty || jobTitle.touched)" class="invalid-form">
             Job Title is required.
-          </div>       
+          </div>
       </div>
       <div class="col-md-6 mb-3">
         <label for="noOfPosition">No. of Position</label>
-        <input type="text" class="form-control" id="noOfPosition" formControlName="noOfPosition" placeholder="" value="" required>
+        <input type="number" class="form-control" id="noOfPosition" formControlName="noOfPosition" placeholder="" value="" required>
         <div *ngIf="noOfPosition.invalid && (noOfPosition.dirty || noOfPosition.touched)" class="invalid-form">
             No. of Position is required.
           </div>
@@ -22,35 +22,35 @@
     <div class="row">
         <div class="col-md-6 mb-3">
           <label for="minSalary">Min Salary</label>
-          <input type="text" class="form-control" id="minSalary" formControlName="minSalary"  placeholder="" value="" required>
+          <input type="number" class="form-control" id="minSalary" formControlName="minSalary"  placeholder="" value="" required>
           <div *ngIf="minSalary.invalid && (minSalary.dirty || minSalary.touched)" class="invalid-form">
               Min Salary is required.
             </div>
         </div>
         <div class="col-md-6 mb-3">
           <label for="maxSalary">Max Salary</label>
-          <input type="text" class="form-control" id="maxSalary" formControlName="maxSalary" placeholder="" value="" required>
+          <input type="number" class="form-control" id="maxSalary" formControlName="maxSalary" placeholder="" value="" required>
           <div *ngIf="maxSalary.invalid && (maxSalary.dirty || maxSalary.touched)" class="invalid-form">
               Max Salary is required.
             </div>
         </div>
-      </div>    
-  
+      </div>
+
     <hr class="mb-4">
     <div class="row">
-    <div class="col-md-4 my-3">
-        <label for="employeeType">Employment Type</label> 
+    <div class="col-md-6 my-4">
+        <label for="employeeType">Employment Type</label>
         <select class="custom-select d-block w-100" formControlName="employeeType"  name="educationLevel" required>
           <option value="">Choose...</option>
           <option>Part Time</option>
-          <option>Full Time</option> 
-         </select> 
+          <option>Full Time</option>
+         </select>
      </div>
      </div>
-    
+
     <div class="row">
       <div class="col-md-12 mb-3">
-        <label for="jobDescription">Job Description</label>                       
+        <label for="jobDescription">Job Description</label>
         <textarea class="form-control" rows="10" id="jobDescription" formControlName="jobDescription" placeholder="" required></textarea>
         <div *ngIf="jobDescription.invalid && (jobDescription.dirty || jobDescription.touched)" class="invalid-form">
             Job Description is required.
@@ -58,13 +58,13 @@
       </div>
     </div>
 
-  
+
      <div class="row">
-          <div class='col-sm-3'>
-              <label for="deadline">Deadline</label>     
+          <div class='col-sm-4'>
+              <label for="deadline">Deadline</label>
               <div class="form-group">
                   <div class='input-group date' id='datetimepicker1'>
-                      <input type='text' formControlName="deadline" class="form-control" />
+                      <input type='Date' formControlName="deadline" class="form-control" />
                       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                       </span>
                       <div *ngIf="deadline.invalid && (deadline.dirty || deadline.touched)" class="invalid-form">

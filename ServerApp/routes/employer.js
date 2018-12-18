@@ -15,7 +15,7 @@ router.get('/jobs', (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
   const userId = tokenPayload.userId;
-  
+
   Job.find({createdBy: userId}).then(jobs => {
     console.log("userId "+userId);
     console.log("inside jobs "+jobs);
@@ -54,20 +54,18 @@ router.post('/profile/add', (req, res, nex) => {
   let fetchedUser;
 
   const companyProfile = {
-    name: req.body.companyName,
+    name: req.body.name,
     website: req.body.website,
-    contactEmail: req.body.email,
-    contactPhone: req.body.contactNo,
+    contactEmail: req.body.contactEmail,
+    contactPhone: req.body.contactPhone,
     introduction: req.body.introduction,
     address: {
       street: req.body.street,
       city: req.body.city,
       state: req.body.state,
-      zipCode: req.body.zip
+      zipCode: req.body.zipCode
     }
   };
-
-  console.log(companyProfile.name);
 
   User.findOneAndUpdate({ _id: userId }, { $set: { 'profile.company': companyProfile } }, function (err, doc) {
     //console.log(doc);
@@ -88,7 +86,7 @@ router.post('/profile/add', (req, res, nex) => {
           zipCode: req.body.zipCode
         }
         */
-      })  
+      })
   })
 })
 
@@ -99,8 +97,8 @@ router.get('/profile/detail', (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
   const userId = tokenPayload.userId;
-  User.findOne({_id: userId}).then(user => {   
-    console.log("id" + userId);  
+  User.findOne({_id: userId}).then(user => {
+    console.log("id" + userId);
     return res.status(200).json({
       data : user.profile.company
      });
@@ -183,7 +181,7 @@ router.post('/job/add', (req, res, next) => {
 router.get('/candidate/detail/:id', (req, res, next) => {
 
   const userId = req.params.id;
-  User.findOne({_id: userId}).then(user => {   
+  User.findOne({_id: userId}).then(user => {
     console.log(user);
     return res.status(200).json({
       data : user

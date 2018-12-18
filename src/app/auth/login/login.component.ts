@@ -1,3 +1,4 @@
+import { LoaderService } from '../../_partials/services/loader.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -20,7 +21,8 @@ export class LoginComponent {
     constructor(
       private formBuilder: FormBuilder,
       private authService: AuthService,
-      private router: Router
+      private router: Router,
+      private loaderService: LoaderService
     ) {
       this.loginForm = formBuilder.group({
         email: ['', [Validators.required]],
@@ -37,15 +39,18 @@ export class LoginComponent {
         password: this.loginForm.value.password
       };
 
+      this.loaderService.showLoader();
       this.authService
         .login(login)
         .subscribe(
           response => {
+            this.loaderService.stopLoader();
             this.authService.loginSuccess(response);
             this.router.navigate(['/home']);
             console.log(response);
           },
-          error => console.log(error)
+          error => {console.log(error); this.loaderService.stopLoader();},
+          () => { this.loaderService.stopLoader(); }
         );
     }
 

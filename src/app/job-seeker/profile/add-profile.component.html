@@ -34,7 +34,7 @@
                 </div>
               </div>
             </div>
-           
+
             <div class="row">
               <div class="col-md-5 mb-3">
                 <label for="education">Education Level</label>
@@ -44,7 +44,7 @@
                   <option>Masters</option>
                   <option>Undergraduate</option>
                 </select>
-                
+
               </div>
               <div class="col-md-4 mb-3">
                 <label for="job">Latest Job Position</label>
@@ -92,11 +92,12 @@
                 <input type="text" class="form-control" formControlName="linkedinProfile" name="linkedinProfile" pattern="^https?://((www|\w\w)\.)?linkedin.com/((in/[^/]+/?)|(pub/[^/]+/((\w|\d)+/?){3}))$" value="" required>
 
                 <div class="invalname-feedback" *ngIf="(linkedinProfile.dirty || linkedinProfile.touched) && linkedinProfile.invalid">
-                    Skills are required.
+                    LinkedinProfile is not valid.
                   </div>
               </div>
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="!addProfile.valid">Save</button>
-           
+
            </form>
         </div>
+

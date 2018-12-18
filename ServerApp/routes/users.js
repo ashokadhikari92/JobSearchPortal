@@ -98,11 +98,21 @@ router.post("/login", function(req, res, next) {
         process.env.JWT_SECRET,
         { expiresIn: "2h" }
       );
+      let profile;
+      if (fetchedUser.role === "seeker") {
+        profile = fetchedUser.profile.user;
+      } else {
+        profile = {
+          ...fetchedUser.profile.company,
+          fullName: fetchedUser.firstName + " " + fetchedUser.lastName
+        };
+      }
 
       return res.status(200).json({
         _token: token,
         _expiresIn: 7200,
         _role: fetchedUser.role,
+        _profile: profile,
         message: "Login Successfull."
       });
     })
