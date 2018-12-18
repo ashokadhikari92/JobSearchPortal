@@ -71,10 +71,11 @@ export class CreateNewJobComponent implements OnInit {
     
   }
 
-  NoOfPositionValidator(control: FormControl): { [s: string]: boolean } {
-    if (control.value === 'Example') {
-      return { example: true };
-    }
+  NoOfPositionValidator(control: FormControl): any {
+    if(control.value.match(/.*[^0-9].*/)){
+      return { 'invalid' : true};
+  }
+    
     return null;
   }
 
