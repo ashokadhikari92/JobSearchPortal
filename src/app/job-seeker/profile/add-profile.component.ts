@@ -23,6 +23,33 @@ export class AddJobSeekerProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
+
+    let data;
+    this.jsDataService
+    .loadProfile()
+    .subscribe(
+      response => {
+        const skillSets = response['data']['profile']['user']['skillSet'].map(function(elem){
+          return elem.name;
+      }).join(",");
+        this.addProfile.patchValue({
+       
+        firstName : response['data']['profile']['user']['firstName'],
+        lastName : response['data']['profile']['user']['lastName'],
+        email : response['data']['profile']['user']['email'],
+        phone : response['data']['profile']['user']['phone'],
+        educationLevel: response['data']['profile']['user']['educationLevel'],
+        latestJobLevel: response['data']['profile']['user']['latestJobLevel'],
+        workExperience: response['data']['profile']['user']['workExperience'],
+        country: response['data']['profile']['user']['country'],
+        location : response['data']['profile']['user']['location'],
+        skillSet:skillSets,
+        linkedinProfile:response['data']['profile']['user']['linkedinProfile']
+
+      });
+    },
+      error => console.log(error)
+    );
     this.addProfile = formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],

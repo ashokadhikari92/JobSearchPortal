@@ -142,7 +142,6 @@ router.get('/profile/detail', (req, res, next) => {
 
 // Route to apply to the job
 router.get('/job/apply/:jobId', (req, res, next) => {
-  console.log("reached");
   let candidate;
   const token = req.headers.authorization.split(" ")[1];
   const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
@@ -170,24 +169,37 @@ router.get('/job/apply/:jobId', (req, res, next) => {
     linkedinProfile: user.linkedinProfile,
     skillSet: skillSets
     };
-    // Job.findOne({candidates: { "$in" : [user.]} }).then(job => {
-    //   console.log("Hello");
-    //   console.log(user)
-    //   return res.status(200).json({
-    //     data : user
-    //    });
-    // });
-    Job.update({_id: jobId}, {$push: { 'candidates': candidate }},function(err){console.log(err)});
+    Job.findOne({"candidates.candidateId": user._id}).then(job => {
+      if(job){
+        return res.status(403).json({
+          message : "You already applied to this job!"
+         });
+      }else{
+        Job.update({_id: jobId}, {$push: { 'candidates': candidate }}).then(
+          (result) =>{
+            return res.status(201)
+            .json({
+              message: "Applied succcessfully!"
+            
+            })
+          }
+        ).catch(
+          (error) =>{
+            return res.status(500)
+  .json({
+    message: "Error!"
+  
+  })
+          }
+        );
+
+      }
+    });
     
   });
   
-  let jobId = req.params.jobId;
-  //console.log(candidate);
-  return res.status(201)
-  .json({
-    message: "Applied succcessfully!"
   
-  })
+  
   
 });
 
