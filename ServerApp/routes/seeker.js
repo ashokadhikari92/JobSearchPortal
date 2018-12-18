@@ -11,19 +11,14 @@ const checkAuth = require("./../middleware/check-authentication");
 // Route to fetch all the jobs
 router.get('/jobs', (req, res, next) => {
 
-  Job.findOne({}).then(jobs => {
-    console.log("Hello");
-    console.log(jobs);
+  Job.find({}).then(jobs => {
+    //console.log("job " + jobId);
+    //console.log(job);
     return res.status(200).json({
       data : jobs
      });
   });
 });
-
-
-
-
-
 
 // Route to fetch job detail
 router.get('/job/detail/:id', (req, res, next ) => {
@@ -59,7 +54,7 @@ router.post('/profile/add', (req, res, next) => {
   const userId = tokenPayload.userId;
 
   User.update({_id: userId}, {$set: { 'profile.user': req.body }},function(err){console.log(err)});
-  User.findOne({_id: userId}).then(user => {console.log(user)});
+  //User.findOne({_id: userId}).then(user => {console.log(user)});
   return res.status(201)
   .json({
     message: "Profile added successfully."});
@@ -138,12 +133,45 @@ router.get('/profile/detail', (req, res, next) => {
 })
 
 // Route to apply to the job
-router.post('/job/apply/:jobId', (req, res, next) => {
+router.get('/job/apply/:jobId', (req, res, next) => {
+  console.log("reached");
+  let candidate;
+  const token = req.headers.authorization.split(" ")[1];
+  const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = tokenPayload.userId;
+  User.findOne({_id: userId}).then(user => {
+     candidate = {
+      firstName : user.firstName,
+      lastName : user.lastName,
+      phone : user.email,
+      country : user.country,
+      location: { 
+        street: user.location,
+        city: "default",
+        state: "default",
+        zipCode: 23214
+     },
+    educationLevel: user.educationLevel,
+    latestJobLevel: user.latestJobLevel,
+    workExperience: user.workExperience,
+    linkedinProfile: user.linkedinProfile,
+    skillSet: [user.skillSet]
+    };
 
-  return res.status(202)
-    .json({
-      message: "Successfully Applied to the Job",
-      })
-})
+    Job.update({_id: jobId}, {$push: { 'candidates': candidate }},function(err){console.log(err)});
+
+    
+    
+  });
+  
+  let jobId = req.params.jobId;
+  //console.log(candidate);
+  return res.status(201)
+  .json({
+    message: "Applied succcessfully!"
+  
+  })
+  
+});
 
 module.exports = router;
