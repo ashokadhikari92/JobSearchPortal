@@ -14,4 +14,10 @@ export class JsdataService {
   loadProfile(){
     return this.http.get('http://localhost:3600/api/seekers/profile/detail');
   }
+  applyJob(jobId){
+    return this.http.get('http://localhost:3600/api/seekers/job/apply/'+jobId);
+  }
+  loadJobs(){
+    return this.http.get('http://localhost:3600/api/seekers/jobs');
+  }
 }

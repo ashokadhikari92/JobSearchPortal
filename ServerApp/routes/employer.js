@@ -34,8 +34,8 @@ router.get('/job/:id', (req, res, next) => {
   let jobId = req.params.id;
 
   Job.findOne({_id: jobId}).then(job => {
-    console.log("job " + jobId);
-    console.log(job);
+    //console.log("job " + jobId);
+    //console.log(job);
     return res.status(200).json({
       data : job
      });
