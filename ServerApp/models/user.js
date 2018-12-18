@@ -6,7 +6,7 @@ const seekerProfile = {
   lastName: { type: String },
   email: { type: String },
   phone: { type: String },
-  countary: { type: String },
+  country: { type: String },
   location: {
     street: { type: String},
     city: { type: String},
@@ -17,7 +17,9 @@ const seekerProfile = {
   latestJobLevel: { type: String },
   workExperience: { type: Number },
   linkedinProfile: { type: String },
-  skillSet: [{type: String}]
+  skillSet: [{
+    name: {type: String}
+  }]
 }
 
 const companyProfile = {

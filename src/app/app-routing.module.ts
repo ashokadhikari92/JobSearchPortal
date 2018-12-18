@@ -30,9 +30,8 @@ const routes: Routes = [
   { path: 'employer/profile', component: AddEmployerProfileComponent},
   { path: 'employer/profile/viewProfile', component: ViewEmployerProfileComponent},
   { path: 'job-seeker/myjobs', component: MyJobsComponent},
-  { path: 'job-seeker/add/profile', component: AddJobSeekerProfileComponent},
-  { path: 'job-seeker/view/profile', component: ViewJobSeekerProfileComponent},
-  { path: 'employer/candidate/detail' , component: CandidateDetailComponent}
+  { path: 'job-seeker/profile', component: AddJobSeekerProfileComponent},
+  { path: 'employer/candidate/detail/:id' , component: CandidateDetailComponent}
 ];
 
 @NgModule({

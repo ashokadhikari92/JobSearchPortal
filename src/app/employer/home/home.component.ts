@@ -20,7 +20,7 @@ export class EmployerHomeComponent implements OnInit {
       response => {
 
         console.log(response);
-       this.jobs = response.data;
+       this.jobs = response['data'];
        //console.log(jobs);
         // this.firstName = data["data"]["firstName"];
         // this.lastName = data["data"]["lastName"];

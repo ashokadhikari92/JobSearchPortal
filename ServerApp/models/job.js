@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const seekerProfile = {
+  candidateId: { type: mongoose.Schema.Types.ObjectId},
   firstName: { type: String },
   lastName: { type: String },
   email: { type: String },
@@ -17,7 +18,9 @@ const seekerProfile = {
   latestJobLevel: { type: String },
   workExperience: { type: Number },
   linkedinProfile: { type: String },
-  skillSet: [{type: String}]
+  skillSet: [{
+    name: {type: String}
+  }]
 }
 
 const jobSchema = mongoose.Schema({

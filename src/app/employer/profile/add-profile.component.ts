@@ -44,7 +44,7 @@ export class AddEmployerProfileComponent implements OnInit {
     this.employeeProfileForm = formBuilder.group({
       companyName: ['', [Validators.required]],
       websiteLink: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required,Validators.email]],
       contactNo: ['', [Validators.required]],
       introduction: ['', [Validators.required]],
      

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { EmployerService } from './../services/employer.service';
 
 @Component({
@@ -20,13 +21,15 @@ export class CandidateDetailComponent implements OnInit {
   skillSet:string;
   linkedinProfile:string;
 
-  constructor(private employerService : EmployerService) { 
-  }
+  constructor(private employerService : EmployerService, route: ActivatedRoute) { 
 
-  ngOnInit() {
+    route.params.subscribe(param => {
+
+    let cId =  param.id;
+
     let data;
     this.employerService
-    .getCandidateById('5c173b6e675f6e0be85d261b')
+    .getCandidateById(cId)
     .subscribe(
       response => {
 
@@ -46,6 +49,11 @@ export class CandidateDetailComponent implements OnInit {
       },
       error => console.log(error)
     );
+  });
+
+  }
+
+  ngOnInit() {
     
    
   }
