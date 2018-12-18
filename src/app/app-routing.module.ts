@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'signup', component: SeekerSignupComponent},
   { path: 'employer/signup', component: EmployerSignupComponent},
   { path: 'employer/job', component: CreateNewJobComponent},
-  { path: 'employer/job/detail', component: JobDetailListComponent},
+  { path: 'employer/job/detail/:id', component: JobDetailListComponent},
   { path: 'employer/profile', component: AddEmployerProfileComponent},
   { path: 'employer/profile/viewProfile', component: ViewEmployerProfileComponent},
   { path: 'job-seeker/myjobs', component: MyJobsComponent},

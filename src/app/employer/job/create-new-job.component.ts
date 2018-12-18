@@ -21,7 +21,7 @@ export class CreateNewJobComponent implements OnInit {
 
     this.createJobForm = formBuilder.group({
       jobTitle: ['', [Validators.required]],
-      noOfPosition: ['', [Validators.required]],
+      noOfPosition: ['', [Validators.required], this.NoOfPositionValidator],
       minSalary: ['', [Validators.required]],
       maxSalary: ['', [Validators.required]],
       employeeType: ['', [Validators.required]],
@@ -69,6 +69,13 @@ export class CreateNewJobComponent implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  NoOfPositionValidator(control: FormControl): { [s: string]: boolean } {
+    if (control.value === 'Example') {
+      return { example: true };
+    }
+    return null;
   }
 
 }

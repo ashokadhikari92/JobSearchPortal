@@ -18,30 +18,72 @@ export class AddEmployerProfileComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private employerService : EmployerService) { 
 
+    
+    this.employerService
+    .getEmployerProfile()
+    .subscribe(
+      res => {
+        //console.log(res);       
+        this.employeeProfileForm.patchValue({
+          companyName: res['data']['name'],
+          websiteLink: res['data']['website'],
+          email: res['data']['contactEmail'],
+          contactNo: res['data']['contactPhone'],
+          introduction: res['data']['introduction'],
+          
+          street : res['data']['address']['street'],
+          city :  res['data']['address']['city'],
+          state :  res['data']['address']['state'],
+          zip :  res['data']['address']['zipCode']
+        });
+      },
+      err => {console.log(err);}
+    );
+     
+ 
     this.employeeProfileForm = formBuilder.group({
       companyName: ['', [Validators.required]],
       websiteLink: ['', [Validators.required]],
       email: ['', [Validators.required]],
       contactNo: ['', [Validators.required]],
       introduction: ['', [Validators.required]],
-      typeOfBusiness: ['', [Validators.required]],
+     
       street : ['', [Validators.required]],
       city : ['', [Validators.required]],
       state : ['', [Validators.required]],
-      zip : ['', [Validators.required]]
-    
+      zip : ['', [Validators.required]]    
     });
 
   }
 
+  get companyName() { return this.employeeProfileForm.get('companyName'); }
+
+  get websiteLink() { return this.employeeProfileForm.get('websiteLink'); }
+
+  get email() { return this.employeeProfileForm.get('email'); }
+
+  get contactNo() { return this.employeeProfileForm.get('contactNo'); }
+
+  get introduction() { return this.employeeProfileForm.get('introduction'); }
+
+
+
+  get street() { return this.employeeProfileForm.get('street'); }
+
+  get city() { return this.employeeProfileForm.get('city'); }
+
+  get state() { return this.employeeProfileForm.get('state'); }
+
+  get zip() { return this.employeeProfileForm.get('zip'); }
+
+
   onSubmit() {
     const profile = {
       companyName: this.employeeProfileForm.value.companyName,
-      websiteLink: this.employeeProfileForm.value.websiteLink,
+      website : this.employeeProfileForm.value.websiteLink,
       email: this.employeeProfileForm.value.email,
       contactNo: this.employeeProfileForm.value.contactNo,
-      introduction: this.employeeProfileForm.value.introduction,
-      typeOfBusiness: this.employeeProfileForm.value.typeOfBusiness,
+      introduction: this.employeeProfileForm.value.introduction,     
       street : this.employeeProfileForm.value.street,
       city : this.employeeProfileForm.value.city,
       state : this.employeeProfileForm.value.state,
