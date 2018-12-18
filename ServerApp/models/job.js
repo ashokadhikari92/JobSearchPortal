@@ -6,7 +6,7 @@ const seekerProfile = {
   lastName: { type: String },
   email: { type: String },
   phone: { type: String },
-  countary: { type: String },
+  country: { type: String },
   location: { 
       street: { type: String},
       city: { type: String},
