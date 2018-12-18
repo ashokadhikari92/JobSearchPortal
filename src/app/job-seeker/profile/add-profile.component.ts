@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JsdataService } from './../services/jsdata.service';
+import { phoneNumberValidator } from './../validators/phone-validator';
 import {
   FormBuilder,
   FormArray,
@@ -25,15 +26,15 @@ export class AddJobSeekerProfileComponent implements OnInit {
     this.addProfile = formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, phoneNumberValidator]],
       educationLevel: ['', [Validators.required]],
       latestJobLevel: ['', [Validators.required]],
-      workExperience: ['', [Validators.required]],
-      country: ['', [Validators.required]],
-      location: ['', [Validators.required]],
+      workExperience: ['', [Validators.required, Validators.pattern]],
+      country: ['', [Validators.required, Validators.pattern]],
+      location: ['', [Validators.required, Validators.pattern]],
       skillSet: ['', [Validators.required]],
-      linkedinProfile: ['', [Validators.required]],
+      linkedinProfile: ['', [Validators.required, Validators.pattern]],
       accept: [0]
     });
 
@@ -73,6 +74,50 @@ export class AddJobSeekerProfileComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+
+  get firstName() {
+    return this.addProfile.get('firstName');
+  }
+  
+  get lastName() {
+    return this.addProfile.get('lastName');
+  }
+
+  get email() {
+    return this.addProfile.get('email');
+  }
+  
+  get phone() {
+    return this.addProfile.get('phone');
+  }
+
+  get educationLevel() {
+    return this.addProfile.get('educationLevel');
+  }
+  
+  get latestJobLevel() {
+    return this.addProfile.get('latestJobLevel');
+  }
+
+  get workExperience() {
+    return this.addProfile.get('workExperience');
+  }
+
+  get country() {
+    return this.addProfile.get('country');
+  }
+
+  get location() {
+    return this.addProfile.get('location');
+  }
+
+  get skillSet() {
+    return this.addProfile.get('skillSet');
+  }
+
+  get linkedinProfile() {
+    return this.addProfile.get('linkedinProfile');
   }
 
 }

@@ -4,46 +4,25 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator/check");
 const User = require("./../models/user");
+const Job = require("./../models/job");
 const checkAuth = require("./../middleware/check-authentication");
 
 
 // Route to fetch all the jobs
 router.get('/jobs', (req, res, next) => {
 
-  return res.status(200)
-  .json({
-    data: [
-      {
-        title: "",
-        company: "",
-        location: {
-          city: "",
-          state: ""
-        },
-        numberOfPotition: "",
-        salaryRange: {
-          min: "",
-          max: ""
-        },
-        publishedDate: ""
-      },
-      {
-        title: "",
-        company: "",
-        location: {
-          city: "",
-          state: ""
-        },
-        numberOfPotition: "",
-        salaryRange: {
-          min: "",
-          max: ""
-        },
-        publishedDate: ""
-      }
-    ]
-  })
+  Job.findOne({}).then(jobs => {
+    console.log("Hello");
+    console.log(jobs);
+    return res.status(200).json({
+      data : jobs
+     });
+  });
 });
+
+
+
+
 
 
 // Route to fetch job detail
@@ -124,7 +103,7 @@ router.get('/profile/detail', (req, res, next) => {
   const userId = tokenPayload.userId;
   User.findOne({_id: userId}).then(user => {
     console.log("Hello");
-    console.log(user);
+    console.log(user)
     return res.status(200).json({
       data : user
      });
