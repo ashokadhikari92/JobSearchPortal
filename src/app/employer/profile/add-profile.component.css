@@ -17,3 +17,6 @@
 :host{
     width: 100%;
   }
+  .invalid-form{
+    color: red;
+  }

@@ -12,27 +12,19 @@ const checkAuth = require("./../middleware/check-authentication");
 // List of job published by the employer
 router.get('/jobs', (req, res, next) => {
 
-  return res.status(200)
-    .json({
-      data: [
-        {
-          title: "",
-          company: "",
-          location: {
-            city: "",
-            state: ""
-          },
-          numberOfPotition: "",
-          salaryRange: {
-            min: "",
-            max: ""
-          },
-          publishedDate: "",
-          status: 'true/false',
-          deadline: ""
-        }
-      ]
-    })
+  const token = req.headers.authorization.split(" ")[1];
+  const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = tokenPayload.userId;
+  
+  Job.find({createdBy: userId}).then(jobs => {
+    console.log("userId "+userId);
+    console.log("inside jobs "+jobs);
+    return res.status(200).json({
+      data : jobs
+     });
+  });
+
+
 });
 
 
@@ -77,7 +69,7 @@ router.post('/profile/add', (req, res, nex) => {
 
   console.log(companyProfile.name);
 
-  User.update({ _id: userId }, { $set: { 'profile.company': companyProfile } }, function (err, doc) {
+  User.findOneAndUpdate({ _id: userId }, { $set: { 'profile.company': companyProfile } }, function (err, doc) {
     //console.log(doc);
     return res.status(201)
       .json({
@@ -96,7 +88,7 @@ router.post('/profile/add', (req, res, nex) => {
           zipCode: req.body.zipCode
         }
         */
-      })
+      })  
   })
 })
 
@@ -104,23 +96,33 @@ router.post('/profile/add', (req, res, nex) => {
 // View Company profile
 router.get('/profile/detail', (req, res, next) => {
 
-  return res.status(200)
-    .json({
-      data: {
-        companyName: "",
-        website: "",
-        contactEmail: "",
-        phone: "",
-        introduction: "",
-        typeOfBusiness: "",
-        address: {
-          street: "",
-          city: "",
-          state: "",
-          zipCode: ""
-        }
-      }
-    })
+  const token = req.headers.authorization.split(" ")[1];
+  const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = tokenPayload.userId;
+  User.findOne({_id: userId}).then(user => {   
+    console.log("id" + userId);  
+    return res.status(200).json({
+      data : user.profile.company
+     });
+  });
+
+  // return res.status(200)
+  //   .json({
+  //     data: {
+  //       companyName: "",
+  //       website: "",
+  //       contactEmail: "",
+  //       phone: "",
+  //       introduction: "",
+  //       typeOfBusiness: "",
+  //       address: {
+  //         street: "",
+  //         city: "",
+  //         state: "",
+  //         zipCode: ""
+  //       }
+  //     }
+  //   })
 })
 
 
@@ -148,7 +150,8 @@ router.post('/job/add', (req, res, next) => {
           max: req.body.maxSalary
         },
         publishedDate: Date.now(),
-        employeeType: req.body.employeeType
+        employeeType: req.body.employeeType,
+        createdBy : userId
       };
 
       const job = new Job(newJob);

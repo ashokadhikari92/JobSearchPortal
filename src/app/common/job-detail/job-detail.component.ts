@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
 import { EmployerService } from './../../employer/services/employer.service';
 
 
@@ -19,19 +19,19 @@ export class JobDetailComponent implements OnInit {
   employeeType:string;
   jobDescription:string; 
 
-  constructor(private employerService : EmployerService) { 
+  constructor(private employerService : EmployerService, route: ActivatedRoute) { 
+     let data;
+   
+    route.params.subscribe(param => {
+      let jobId =  param.id;
+      console.log(jobId);
 
-  }
-
-  //to do list - pass the id here
-  ngOnInit() {
-    let data;
     this.employerService
-    .getJobDetailById('5c173b6e675f6e0be85d261b')    
+    .getJobDetailById(jobId)    
     .subscribe(
       response => {
           data = response;  
-          this.name = data['data']['company'];
+          this.name = data['data']['title'];
           this.noOfPosition = data['data']['numberOfPosition'];
           this.location = data['data']['location']['city'] + ' ' + data['data']['location']['state'] ;
           this.minSalary = data['data']['salaryRange']['min'];
@@ -42,8 +42,14 @@ export class JobDetailComponent implements OnInit {
       },
       error => console.log(error)
     );
-    
-   
+
+  });
+
+  }
+
+  
+ 
+  ngOnInit() {   
   }
 
 

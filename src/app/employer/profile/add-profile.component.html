@@ -6,16 +6,16 @@
                       <div class="col-md-6 mb-3">
                         <label for="companyName">Company Name</label>
                         <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                          Valid first name is required.
-                        </div>
+                        <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)" class="invalid-form">
+                            Company Name is required.
+                          </div>  
                       </div>
                       <div class="col-md-6 mb-3">
                         <label for="websiteLink">Website Link</label>
                         <input type="text" class="form-control" id="websiteLink" formControlName="websiteLink" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                          Valid last name is required.
-                        </div>
+                        <div *ngIf="websiteLink.invalid && (websiteLink.dirty || websiteLink.touched)" class="invalid-form">
+                            Website Link is required.
+                          </div> 
                       </div>
                     </div>
 
@@ -24,17 +24,17 @@
                         <div class="col-md-6 mb-3">
                             <label for="email">Email </label>
                             <input type="email" class="form-control" id="email" formControlName="email" placeholder="you@example.com">
-                            <div class="invalid-feedback">
-                              Please enter a valid email address for shipping updates.
-                            </div>
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid-form">
+                                Email is required.
+                              </div> 
                           </div>
 
                         <div class="col-md-6 mb-3">
                           <label for="contactNo">Contact No.</label>
                           <input type="text" class="form-control" id="contactNo" formControlName="contactNo"  placeholder="" value="" required>
-                          <div class="invalid-feedback">
-                            Valid last name is required.
-                          </div>
+                          <div *ngIf="contactNo.invalid && (contactNo.dirty || contactNo.touched)" class="invalid-form">
+                              Contact No. is required.
+                            </div> 
                         </div>
                       </div>
                       
@@ -43,21 +43,13 @@
                         <div class="col-md-12 mb-3">
                           <label for="cc-expiration">Introduction</label>                       
                           <textarea class="form-control" rows="10" id="cc-expiration" formControlName="introduction" placeholder="" required></textarea>
-                          <div class="invalid-feedback">
-                            Expiration date required
-                          </div>
+                          <div *ngIf="introduction.invalid && (introduction.dirty || introduction.touched)" class="invalid-form">
+                              Introduction is required.
+                            </div> 
                         </div>  
                       </div>
                       
-                      <div class="row">
-                      <div class="col-md-6 mb-3">
-                        <label for="typeOfBusiness">Type of Business</label>
-                        <input type="text" class="form-control" id="typeOfBusiness" formControlName="typeOfBusiness" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                          Valid last name is required.
-                        </div>
-                      </div>
-                      </div>
+                 
                   
                     
 
@@ -65,17 +57,17 @@
                       <div class="col-md-6 mb-3">
                         <label for="street">Street</label>
                         <input type="text" class="form-control" id="street"  formControlName="street" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                          Valid last name is required.
-                        </div>
+                        <div *ngIf="street.invalid && (street.dirty || street.touched)" class="invalid-form">
+                            Street is required.
+                          </div>
                       </div>
                       <div class="col-md-6 mb-3">
                         <label for="city">City</label>
                         
                         <input type="text" class="form-control" id="city" formControlName="city" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                          Valid last name is required.
-                        </div>
+                        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="invalid-form">
+                            City is required.
+                          </div>
                       </div>
                     </div>
 
@@ -83,17 +75,17 @@
                       <div class="col-md-3 mb-3">
                         <label for="state">State</label>
                         <input type="text" class="form-control" id="state" formControlName="state" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                          Valid last name is required.
-                        </div>
+                        <div *ngIf="state.invalid && (state.dirty || state.touched)" class="invalid-form">
+                            State is required.
+                          </div>
                       </div>
                       <div class="col-md-3 mb-3">
                         <label for="zip">Zip</label>
                         
                         <input type="text" class="form-control" id="zip" formControlName="zip" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                          Valid last name is required.
-                        </div>
+                        <div *ngIf="zip.invalid && (zip.dirty || zip.touched)" class="invalid-form">
+                            Zip is required.
+                          </div>
                       </div>
                     </div>
     
@@ -102,6 +94,6 @@
                     
               
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
+                    <button class="btn btn-primary btn-lg btn-block" [disabled]="!employeeProfileForm.valid" type="submit">Save</button>
                   </form>
                 </div>
