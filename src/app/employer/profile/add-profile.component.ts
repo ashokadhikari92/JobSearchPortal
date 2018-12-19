@@ -102,6 +102,7 @@ export class AddEmployerProfileComponent implements OnInit {
         this.loader.stopLoader();
         this.flashMessage.show('Profile updated successfully.' , { cssClass: 'alert-success'});
         this.store.dispatch(new ProfileActions.SaveAllDetail(profile));
+        localStorage.setItem('employer_profile', JSON.stringify(profile));
       },
       error => {
         console.log(error);

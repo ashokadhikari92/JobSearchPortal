@@ -131,7 +131,8 @@ export class AuthService {
       country: profile.country,
       location: profile.location,
       skillSet: profile.skillSet.map(skill => skill.name),
-      linkedinProfile: profile.linkedinProfile
+      linkedinProfile: profile.linkedinProfile,
+      resume: profile.resume
     };
 
     localStorage.setItem('seeker_profile', JSON.stringify(newProfile));

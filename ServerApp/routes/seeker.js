@@ -166,7 +166,8 @@ router.get("/job/apply/:jobId",checkAuth, checkSeeker, (req, res, next) => {
       latestJobLevel: user.profile.user.latestJobLevel,
       workExperience: user.profile.user.workExperience,
       linkedinProfile: user.profile.user.linkedinProfile,
-      skillSet: skillSets
+      skillSet: skillSets,
+      resume: user.profile.user.resume
     };
     console.log(candidate);
     Job.findOne({ _id: req.params.jobId, "candidates.candidateId": user._id }).then(job => {

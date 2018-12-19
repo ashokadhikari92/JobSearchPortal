@@ -10,4 +10,5 @@ export interface SeekerProfile {
    location: String;
    skillSet: any[];
    linkedinProfile: String;
+   resume: String;
 }

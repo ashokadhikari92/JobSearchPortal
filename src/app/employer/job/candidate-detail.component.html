@@ -57,8 +57,14 @@
           <div class="col-md-6">
             <label class="label" for="resume">LinkedIn Profile</label>
             <div class="info-detail">{{linkedinProfile}}</div>
-
-
           </div>
         </div>
+
+        <div class="row form-group" *ngIf="resume">
+            <div class="col-md-6">
+              <label class="label" for="resume">
+                <a target="_blank" href="http://localhost:3600/candidate/resume/{{ resume }}">View Resume</a>
+              </label>
+            </div>
+          </div>
       </div>

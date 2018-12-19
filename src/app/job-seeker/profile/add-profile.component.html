@@ -1,103 +1,115 @@
-  <div class="col-md-8 order-md-1 offset-md-2">
-            <h4 class="mb-3">Profile</h4>
-         <form class="needs-valnameation" method="POST" [formGroup]="addProfile" (ngSubmit)="onSubmit()">
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" formControlName="firstName" name="firstName" placeholder="" value="" required>
-                <div class="invalname-feedback" *ngIf="(firstName.dirty || firstName.touched) && firstName.invalid">
-                  First name is required.
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" formControlName="lastName" name="lastName" placeholder="" value="" required>
-                <div class="invalname-feedback" *ngIf="(lastName.dirty || lastName.touched) && lastName.invalid">
-                  Last name is required.
-                </div>
-              </div>
-            </div>
+<div class="col-md-8 order-md-1 offset-md-2">
+  <h4 class="mb-3">Profile</h4>
+  <form class="needs-valnameation" method="POST" [formGroup]="addProfile" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="firstName">First name</label>
+        <input type="text" class="form-control" formControlName="firstName" name="firstName" placeholder="" value="" required>
+        <div class="invalname-feedback" *ngIf="(firstName.dirty || firstName.touched) && firstName.invalid">
+          First name is required.
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="lastName">Last name</label>
+        <input type="text" class="form-control" formControlName="lastName" name="lastName" placeholder="" value="" required>
+        <div class="invalname-feedback" *ngIf="(lastName.dirty || lastName.touched) && lastName.invalid">
+          Last name is required.
+        </div>
+      </div>
+    </div>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" formControlName="email" name="email" placeholder="Email" value="" required>
-                <div class="invalname-feedback" *ngIf="(email.dirty || email.touched) && email.invalid">
-                  Valid email is required.
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="phone">Phone</label>
-                <input type="phone" class="form-control" formControlName="phone" name="phone" placeholder="Phone" value="" required>
-                <div class="invalname-feedback" *ngIf="(phone.dirty || phone.touched) && phone.invalid">
-                  Valid phone is required.
-                </div>
-              </div>
-            </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" formControlName="email" name="email" placeholder="Email" value="" required>
+        <div class="invalname-feedback" *ngIf="(email.dirty || email.touched) && email.invalid">
+          Valid email is required.
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="phone">Phone</label>
+        <input type="phone" class="form-control" formControlName="phone" name="phone" placeholder="Phone" value="" required>
+        <div class="invalname-feedback" *ngIf="(phone.dirty || phone.touched) && phone.invalid">
+          Valid phone is required.
+        </div>
+      </div>
+    </div>
 
-            <div class="row">
-              <div class="col-md-5 mb-3">
-                <label for="education">Education Level</label>
-                <select class="custom-select d-block w-100" formControlName="educationLevel"  name="educationLevel">
+    <div class="row">
+      <div class="col-md-5 mb-3">
+        <label for="education">Education Level</label>
+        <select class="custom-select d-block w-100" formControlName="educationLevel" name="educationLevel">
                   <option value="">Choose...</option>
                   <option>PhD</option>
                   <option>Masters</option>
                   <option>Undergraduate</option>
                 </select>
 
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="job">Latest Job Position</label>
-                <input type="text" class="form-control" formControlName="latestJobLevel" name="latestJobLevel" placeholder="Latest Position" value="" required>
-                <div class="invalname-feedback" *ngIf="(latestJobLevel.dirty || latestJobLevel.touched) && latestJobLevel.invalid">
-                  Position is required.
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="experience">Years of Experience</label>
-                <input type="number" class="form-control" formControlName="workExperience" pattern="[0-9]*" name="workExperience" placeholder="Years of Experience" required>
-                <div class="invalname-feedback" *ngIf="(workExperience.dirty || workExperience.touched) && workExperience.invalid">
-                  Valid Experience required.
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="country">Country</label>
-                <input type="text" class="form-control" formControlName="country" name="country" pattern="[a-zA-Z ]*" placeholder="Country" value="" required>
-                <div class="invalname-feedback" *ngIf="(country.dirty || country.touched) && country.invalid">
-                  Country is required.
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="location">Location</label>
-                <input type="text" class="form-control" formControlName="location" name="location" pattern="[a-zA-Z 0-9]*" placeholder="Location" value="" required>
-                <div class="invalname-feedback" *ngIf="(location.dirty || location.touched) && location.invalid">
-                  Location is required.
-                </div>
-              </div>
-            </div>
-
-           <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="skills">Skills</label>
-                <input type="text" class="form-control" formControlName="skillSet" name="skillSet" placeholder="Skills" value="" required>
-                <div class="invalname-feedback" *ngIf="(skillSet.dirty || skillSet.touched) && skillSet.invalid">
-                  Skills are required.
-                </div>
-              </div>
-              <div class="col-md-6 mb-3 custom-file">
-                <label for="resume">LinkedIn Profile</label>
-                <input type="text" class="form-control" formControlName="linkedinProfile" name="linkedinProfile" pattern="^https?://((www|\w\w)\.)?linkedin.com/((in/[^/]+/?)|(pub/[^/]+/((\w|\d)+/?){3}))$" value="" required>
-
-                <div class="invalname-feedback" *ngIf="(linkedinProfile.dirty || linkedinProfile.touched) && linkedinProfile.invalid">
-                    LinkedinProfile is not valid.
-                  </div>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary" [disabled]="!addProfile.valid">Save</button>
-
-           </form>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="job">Latest Job Position</label>
+        <input type="text" class="form-control" formControlName="latestJobLevel" name="latestJobLevel" placeholder="Latest Position"
+          value="" required>
+        <div class="invalname-feedback" *ngIf="(latestJobLevel.dirty || latestJobLevel.touched) && latestJobLevel.invalid">
+          Position is required.
         </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="experience">Years of Experience</label>
+        <input type="number" class="form-control" formControlName="workExperience" pattern="[0-9]*" name="workExperience" placeholder="Years of Experience"
+          required>
+        <div class="invalname-feedback" *ngIf="(workExperience.dirty || workExperience.touched) && workExperience.invalid">
+          Valid Experience required.
+        </div>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="country">Country</label>
+        <input type="text" class="form-control" formControlName="country" name="country" pattern="[a-zA-Z ]*" placeholder="Country"
+          value="" required>
+        <div class="invalname-feedback" *ngIf="(country.dirty || country.touched) && country.invalid">
+          Country is required.
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" formControlName="location" name="location" pattern="[a-zA-Z 0-9]*" placeholder="Location"
+          value="" required>
+        <div class="invalname-feedback" *ngIf="(location.dirty || location.touched) && location.invalid">
+          Location is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="skills">Skills</label>
+        <input type="text" class="form-control" formControlName="skillSet" name="skillSet" placeholder="Skills" value="" required>
+        <div class="invalname-feedback" *ngIf="(skillSet.dirty || skillSet.touched) && skillSet.invalid">
+          Skills are required.
+        </div>
+      </div>
+      <div class="col-md-6 mb-3 custom-file">
+        <label for="resume">LinkedIn Profile</label>
+        <input type="text" class="form-control" formControlName="linkedinProfile" name="linkedinProfile" pattern="^https?://((www|\w\w)\.)?linkedin.com/((in/[^/]+/?)|(pub/[^/]+/((\w|\d)+/?){3}))$"
+          value="" required>
+
+        <div class="invalname-feedback" *ngIf="(linkedinProfile.dirty || linkedinProfile.touched) && linkedinProfile.invalid">
+          LinkedinProfile is not valid.
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3 ">
+        <label for="resume">Upload resume</label>
+        <input accept=".pdf" type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+        <a target="_blank" *ngIf="resumePath" href="http://localhost:3600/candidate/resume/{{resumePath}}">Existing Resume</a>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3 ">
+      <button type="submit" class="btn btn-primary" [disabled]="!addProfile.valid">Save</button>
+    </div>
+  </form>
+</div>
