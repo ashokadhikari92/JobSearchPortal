@@ -9,49 +9,60 @@ import {
   Validators
 } from '@angular/forms';
 import { AuthService } from './../services/auth.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent {
   private loginForm: FormGroup;
+  private submitted = false;
 
-    constructor(
-      private formBuilder: FormBuilder,
-      private authService: AuthService,
-      private router: Router,
-      private loaderService: LoaderService
-    ) {
-      this.loginForm = formBuilder.group({
-        email: ['', [Validators.required]],
-        password: ['', [Validators.required]],
-        remember: [1, [Validators.required]]
-      });
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private loaderService: LoaderService,
+    private flashMessage: FlashMessagesService
+  ) {
+    this.loginForm = formBuilder.group({
+      email: ["", [Validators.required,Validators.email]],
+      password: ["", [Validators.required]],
+      remember: [1, [Validators.required]]
+    });
+  }
 
+  get f() { return this.loginForm.controls;}
+  onSubmit() {
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
     }
 
-    onSubmit() {
-      console.log(this.loginForm);
-      const login = {
-        email: this.loginForm.value.email,
-        password: this.loginForm.value.password
-      };
+    const login = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
 
-      this.loaderService.showLoader();
-      this.authService
-        .login(login)
-        .subscribe(
-          response => {
-            this.loaderService.stopLoader();
-            this.authService.loginSuccess(response);
-            this.router.navigate(['/home']);
-            console.log(response);
-          },
-          error => {console.log(error); this.loaderService.stopLoader();},
-          () => { this.loaderService.stopLoader(); }
-        );
-    }
-
+    this.loaderService.showLoader();
+    this.authService.login(login).subscribe(
+      response => {
+        this.loaderService.stopLoader();
+        this.authService.loginSuccess(response);
+        this.router.navigate(["/home"]);
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+        this.flashMessage.show(error.error.message, { cssClass: 'alert-danger'});
+        this.loaderService.stopLoader();
+      },
+      () => {
+        this.loaderService.stopLoader();
+      }
+    );
+  }
 }

@@ -6,3 +6,7 @@
 .checkbox{
   margin-right: 10px;
 }
+
+.is-invalid {
+  color: red;
+}
