@@ -8,11 +8,11 @@ import { EmployerService } from './../services/employer.service';
 })
 export class EmployerHomeComponent implements OnInit {
 
-  constructor(private employerService : EmployerService) { 
+  constructor(private employerService : EmployerService) {
   }
-  jobs;
+  jobs = [];
   ngOnInit() {
-    
+
 
     this.employerService
     .getJobsByEmployer()
@@ -37,8 +37,8 @@ export class EmployerHomeComponent implements OnInit {
       },
       error => console.log(error)
     );
-    
-   
+
+
   }
 
 }

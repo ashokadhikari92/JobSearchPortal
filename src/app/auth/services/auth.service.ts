@@ -129,7 +129,7 @@ export class AuthService {
       latestJobLevel: profile.latestJobLevel,
       workExperience: profile.workExperience,
       country: profile.country,
-      location: profile.location,
+      location: profile.location.street,
       skillSet: profile.skillSet.map(skill => skill.name),
       linkedinProfile: profile.linkedinProfile,
       resume: profile.resume

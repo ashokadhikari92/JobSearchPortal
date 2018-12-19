@@ -14,7 +14,7 @@ router.get("/jobs", checkAuth, checkEmployer,(req, res, next) => {
   const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
   const userId = tokenPayload.userId;
 
-  Job.find({ createdBy: userId }).then(jobs => {
+  Job.find({ createdBy: userId },{},{sort:{publishedDate: -1 }}).then(jobs => {
     console.log("userId " + userId);
     console.log("inside jobs " + jobs);
     return res.status(200).json({

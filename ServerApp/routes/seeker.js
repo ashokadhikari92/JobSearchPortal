@@ -10,7 +10,7 @@ const checkSeeker = require("./../middleware/check-seeker");
 
 // Route to fetch all the jobs
 router.get("/jobs", (req, res, next) => {
-  Job.find({})
+  Job.find({},{},{sort:{publishedDate: -1 }})
     .then(jobs => {
       return res.status(200).json({
         data: jobs
@@ -24,7 +24,6 @@ router.get("/jobs", (req, res, next) => {
 });
 
 router.get("/jobs/filter", (req, res, next) => {
-  console.log("I am here;");
   const title = req.query.title;
   const location = req.query.location.split(",");
   let condition = {};
@@ -59,7 +58,7 @@ router.get("/jobs/filter", (req, res, next) => {
   }
 
   console.log(condition);
-  Job.find(condition)
+  Job.find(condition,{},{sort:{publishedDate: -1 }})
     .then(jobs => {
       return res.status(200).json({
         data: jobs
