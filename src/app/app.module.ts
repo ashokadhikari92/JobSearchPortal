@@ -31,6 +31,7 @@ import { LoaderComponent } from './_partials/loader/loader.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { seekerProfileReducer } from './job-seeker/store/profile.reducers';
 import { employerProfileReducer } from './employer/store/profile.reducers';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { employerProfileReducer } from './employer/store/profile.reducers';
     AuthModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({seekerProfile: seekerProfileReducer, employerProfile: employerProfileReducer})
+    StoreModule.forRoot({seekerProfile: seekerProfileReducer, employerProfile: employerProfileReducer}),
+    FlashMessagesModule.forRoot()
   ],
   providers: [EmployerService],
   bootstrap: [AppComponent]

@@ -94,7 +94,6 @@ export class AuthService {
     localStorage.setItem("isAuthenticated", "true");
     localStorage.setItem("role", role);
     localStorage.setItem("expiration", expirationDate.toISOString());
-    localStorage.setItem(role + "_profile", JSON.stringify(profile));
   }
 
   private clearAuthData() {
@@ -132,9 +131,11 @@ export class AuthService {
       country: profile.country,
       location: profile.location,
       skillSet: profile.skillSet.map(skill => skill.name),
-      linkedinProfile: profile.linkedinProfile
+      linkedinProfile: profile.linkedinProfile,
+      resume: profile.resume
     };
 
+    localStorage.setItem('seeker_profile', JSON.stringify(newProfile));
     this.seekerStore.dispatch(new SeekerProfileActions.SaveAllDetail(newProfile));
   }
 
@@ -152,6 +153,7 @@ export class AuthService {
       zipCode: profile.address.zipCode
     };
 
+    localStorage.setItem('employer_profile', JSON.stringify(newProfile));
     this.employerStore.dispatch(new EmployerProfileActions.SaveAllDetail(newProfile));
   }
 }

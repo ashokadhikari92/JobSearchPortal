@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -7,41 +8,59 @@ import {
   Validators
 } from '@angular/forms';
 import { EmployerService } from './../services/employer.service';
+import { LoaderService } from './../../_partials/services/loader.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 
 @Component({
-  selector: 'app-create-new-job',
-  templateUrl: './create-new-job.component.html',
-  styleUrls: ['./create-new-job.component.css']
+  selector: "app-create-new-job",
+  templateUrl: "./create-new-job.component.html",
+  styleUrls: ["./create-new-job.component.css"]
 })
 export class CreateNewJobComponent implements OnInit {
-  private createJobForm : FormGroup;
+  private createJobForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private employerService : EmployerService) {
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private employerService: EmployerService,
+    private loader: LoaderService,
+    private flashMessage: FlashMessagesService,
+    private router: Router
+  ) {
     this.createJobForm = formBuilder.group({
-      jobTitle: ['', [Validators.required]],
-      noOfPosition: ['', [Validators.required]],
-      minSalary: ['', [Validators.required]],
-      maxSalary: ['', [Validators.required]],
-      employeeType: ['', [Validators.required]],
-      jobDescription: ['', [Validators.required]],
-      deadline : ['', [Validators.required]]
+      jobTitle: ["", [Validators.required]],
+      noOfPosition: ["", [Validators.required]],
+      minSalary: ["", [Validators.required]],
+      maxSalary: ["", [Validators.required]],
+      employeeType: ["", [Validators.required]],
+      jobDescription: ["", [Validators.required]],
+      deadline: ["", [Validators.required]]
     });
-
   }
 
-  get jobTitle() { return this.createJobForm.get('jobTitle'); }
+  get jobTitle() {
+    return this.createJobForm.get("jobTitle");
+  }
 
-  get noOfPosition() { return this.createJobForm.get('noOfPosition'); }
+  get noOfPosition() {
+    return this.createJobForm.get("noOfPosition");
+  }
 
-  get minSalary() { return this.createJobForm.get('minSalary'); }
+  get minSalary() {
+    return this.createJobForm.get("minSalary");
+  }
 
-  get maxSalary() { return this.createJobForm.get('maxSalary'); }
+  get maxSalary() {
+    return this.createJobForm.get("maxSalary");
+  }
 
-  get jobDescription() { return this.createJobForm.get('jobDescription'); }
+  get jobDescription() {
+    return this.createJobForm.get("jobDescription");
+  }
 
-  get deadline() { return this.createJobForm.get('deadline'); }
+  get deadline() {
+    return this.createJobForm.get("deadline");
+  }
 
   onSubmit() {
     const jobForm = {
@@ -51,32 +70,31 @@ export class CreateNewJobComponent implements OnInit {
       maxSalary: this.createJobForm.value.maxSalary,
       employeeType: this.createJobForm.value.employeeType,
       jobDescription: this.createJobForm.value.jobDescription,
-      deadline : this.createJobForm.value.deadline,
-
+      deadline: this.createJobForm.value.deadline
     };
-  console.log("jobForm submit");
-    this.employerService
-        .addJob(jobForm)
-        .subscribe(
-          response => {
-            console.log(response);
-          },
-          error => console.log(error)
-        );
 
+    this.loader.showLoader();
+    this.employerService.addJob(jobForm).subscribe(
+      response => {
+        this.loader.stopLoader();
+        this.flashMessage.show('Job published successfully.', {cssClass: 'alert-success'});
+        this.router.navigate(['/home']);
+      },
+      error => {
+        console.log(error);
+        this.loader.stopLoader();
+        this.flashMessage.show('Failed to publish the job.', {cssClass: 'alert-danger'});
+      }
+    );
   }
 
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   NoOfPositionValidator(control: FormControl): any {
-    if(control.value.match(/.*[^0-9].*/)){
-      return { 'invalid' : true};
-  }
+    if (control.value.match(/.*[^0-9].*/)) {
+      return { invalid: true };
+    }
 
     return null;
   }
-
 }

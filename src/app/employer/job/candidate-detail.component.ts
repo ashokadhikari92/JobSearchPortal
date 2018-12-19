@@ -9,10 +9,10 @@ import { EmployerService } from './../services/employer.service';
 })
 export class CandidateDetailComponent implements OnInit {
 
-  firstName:string; 
-  lastName:string; 
-  email:string; 
-  phone:string; 
+  firstName:string;
+  lastName:string;
+  email:string;
+  phone:string;
   educationLevel:string;
   latestJobLevel:string;
   workExperience:string;
@@ -20,8 +20,9 @@ export class CandidateDetailComponent implements OnInit {
   location:string;
   skillSet:string;
   linkedinProfile:string;
+  resume: string;
 
-  constructor(private employerService : EmployerService, route: ActivatedRoute) { 
+  constructor(private employerService : EmployerService, route: ActivatedRoute) {
 
     route.params.subscribe(param => {
 
@@ -32,7 +33,7 @@ export class CandidateDetailComponent implements OnInit {
     .getCandidateById(cId)
     .subscribe(
       response => {
-
+        console.log(response);
         data = response;
         this.firstName = data["data"]["firstName"];
         this.lastName = data["data"]["lastName"];
@@ -45,7 +46,7 @@ export class CandidateDetailComponent implements OnInit {
         this.location = data["data"]["profile"]["user"]["location"];
         this.skillSet = data["data"]["profile"]["user"]["skillSet"];
         this.linkedinProfile = data["data"]["profile"]["user"]["linkedinProfile"];
-
+        this.resume = data["data"]["profile"]["user"]["resume"];
       },
       error => console.log(error)
     );
@@ -54,7 +55,7 @@ export class CandidateDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-   
+
+
   }
 }

@@ -37,12 +37,12 @@ router.post("/api/upload/resume", function(req, res, next) {
         error: err
       });
     }
-    // No error occured.
-    path = req.file.path;
+    resumeFile = req.file.filename;
 
     return res.status(201).json({
       message: "Resume uploaded.",
-      path: path
+      resume: resumeFile,
+      path: req.file.path
     });
   });
 });

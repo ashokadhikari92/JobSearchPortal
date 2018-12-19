@@ -7,125 +7,115 @@ import {
   Validators
 } from '@angular/forms';
 import { EmployerService } from './../services/employer.service';
-
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";
 import { EmployerProfile } from "../profile.model";
 import * as ProfileActions from "../store/profile.actions";
 import * as fromProfile from "../store/profile.reducers";
+import { LoaderService } from './../../_partials/services/loader.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
-  selector: 'app-add-profile',
-  templateUrl: './add-profile.component.html',
-  styleUrls: ['./add-profile.component.css']
+  selector: "app-add-profile",
+  templateUrl: "./add-profile.component.html",
+  styleUrls: ["./add-profile.component.css"]
 })
 export class AddEmployerProfileComponent implements OnInit {
   private employeeProfileForm: FormGroup;
   private employerProfile: Observable<EmployerProfile>;
-  private fullName = '';
+  private fullName = "";
 
-  constructor(private formBuilder: FormBuilder, private employerService: EmployerService, private store: Store<fromProfile.State>) {
-
-
-    // this.employerService
-    // .getEmployerProfile()
-    // .subscribe(
-    //   res => {
-    //     //console.log(res);
-    //     this.employeeProfileForm.patchValue({
-    //       companyName: res['data']['name'],
-    //       websiteLink: res['data']['website'],
-    //       email: res['data']['contactEmail'],
-    //       contactNo: res['data']['contactPhone'],
-    //       introduction: res['data']['introduction'],
-
-    //       street : res['data']['address']['street'],
-    //       city :  res['data']['address']['city'],
-    //       state :  res['data']['address']['state'],
-    //       zip :  res['data']['address']['zipCode']
-    //     });
-    //   },
-    //   err => {console.log(err);}
-    // );
-
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private employerService: EmployerService,
+    private store: Store<fromProfile.State>,
+    private flashMessage: FlashMessagesService,
+    private loader: LoaderService
+  ) {
     this.employeeProfileForm = formBuilder.group({
-      companyName: ['', [Validators.required]],
-      websiteLink: ['', [Validators.required]],
-      email: ['', [Validators.required,Validators.email]],
-      contactNo: ['', [Validators.required]],
-      introduction: ['', [Validators.required]],
+      companyName: ["", [Validators.required]],
+      websiteLink: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      contactNo: ["", [Validators.required]],
+      introduction: ["", [Validators.required]],
 
-      street : ['', [Validators.required]],
-      city : ['', [Validators.required]],
-      state : ['', [Validators.required]],
-      zip : ['', [Validators.required]]
+      street: ["", [Validators.required]],
+      city: ["", [Validators.required]],
+      state: ["", [Validators.required]],
+      zip: ["", [Validators.required]]
     });
-
   }
 
-  get companyName() { return this.employeeProfileForm.get('companyName'); }
+  get companyName() {
+    return this.employeeProfileForm.get("companyName");
+  }
 
-  get websiteLink() { return this.employeeProfileForm.get('websiteLink'); }
+  get websiteLink() {
+    return this.employeeProfileForm.get("websiteLink");
+  }
 
-  get email() { return this.employeeProfileForm.get('email'); }
+  get email() {
+    return this.employeeProfileForm.get("email");
+  }
 
-  get contactNo() { return this.employeeProfileForm.get('contactNo'); }
+  get contactNo() {
+    return this.employeeProfileForm.get("contactNo");
+  }
 
-  get introduction() { return this.employeeProfileForm.get('introduction'); }
+  get introduction() {
+    return this.employeeProfileForm.get("introduction");
+  }
 
+  get street() {
+    return this.employeeProfileForm.get("street");
+  }
 
+  get city() {
+    return this.employeeProfileForm.get("city");
+  }
 
-  get street() { return this.employeeProfileForm.get('street'); }
+  get state() {
+    return this.employeeProfileForm.get("state");
+  }
 
-  get city() { return this.employeeProfileForm.get('city'); }
-
-  get state() { return this.employeeProfileForm.get('state'); }
-
-  get zip() { return this.employeeProfileForm.get('zip'); }
-
+  get zip() {
+    return this.employeeProfileForm.get("zip");
+  }
 
   onSubmit() {
-    // const profile = {
-    //   companyName: this.employeeProfileForm.value.companyName,
-    //   website : this.employeeProfileForm.value.websiteLink,
-    //   email: this.employeeProfileForm.value.email,
-    //   contactNo: this.employeeProfileForm.value.contactNo,
-    //   introduction: this.employeeProfileForm.value.introduction,
-    //   street : this.employeeProfileForm.value.street,
-    //   city : this.employeeProfileForm.value.city,
-    //   state : this.employeeProfileForm.value.state,
-    //   zip : this.employeeProfileForm.value.zip
-    // };
-
     const profile = {
       name: this.employeeProfileForm.value.companyName,
-      website : this.employeeProfileForm.value.websiteLink,
+      website: this.employeeProfileForm.value.websiteLink,
       contactEmail: this.employeeProfileForm.value.email,
       contactPhone: this.employeeProfileForm.value.contactNo,
       introduction: this.employeeProfileForm.value.introduction,
-      street : this.employeeProfileForm.value.street,
-      city : this.employeeProfileForm.value.city,
-      state : this.employeeProfileForm.value.state,
-      zipCode : this.employeeProfileForm.value.zip,
+      street: this.employeeProfileForm.value.street,
+      city: this.employeeProfileForm.value.city,
+      state: this.employeeProfileForm.value.state,
+      zipCode: this.employeeProfileForm.value.zip,
       fullName: this.fullName
     };
 
-    this.employerService
-        .addEmployerProfile(profile)
-        .subscribe(
-          response => {
-            this.store.dispatch(new ProfileActions.SaveAllDetail(profile));
-          },
-          error => console.log(error)
-        );
-
+    this.loader.showLoader();
+    this.employerService.addEmployerProfile(profile).subscribe(
+      response => {
+        this.loader.stopLoader();
+        this.flashMessage.show('Profile updated successfully.' , { cssClass: 'alert-success'});
+        this.store.dispatch(new ProfileActions.SaveAllDetail(profile));
+        localStorage.setItem('employer_profile', JSON.stringify(profile));
+      },
+      error => {
+        console.log(error);
+        this.loader.stopLoader();
+        this.flashMessage.show('Failed to update your profile.', { cssClass: 'alert-danger'});
+      }
+    );
   }
 
   ngOnInit() {
-    this.employerProfile = this.store.select('employerProfile');
+    this.employerProfile = this.store.select("employerProfile");
     this.employerProfile.subscribe(result => {
-      const profile = result['profile'];
+      const profile = result["profile"];
       this.fullName = profile.fullName;
       localStorage.setItem("employer_profile", JSON.stringify(profile));
       this.employeeProfileForm.patchValue({
@@ -134,12 +124,11 @@ export class AddEmployerProfileComponent implements OnInit {
         email: profile.contactEmail,
         contactNo: profile.contactPhone,
         introduction: profile.introduction,
-        street : profile.street,
-        city : profile.city,
-        state : profile.state,
-        zip : profile.zipCode
+        street: profile.street,
+        city: profile.city,
+        state: profile.state,
+        zip: profile.zipCode
       });
     });
   }
-
 }

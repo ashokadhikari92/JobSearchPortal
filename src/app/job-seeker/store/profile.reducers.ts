@@ -18,7 +18,8 @@ let newProfile = {
   country: '',
   location: '',
   skillSet: [],
-  linkedinProfile: ''
+  linkedinProfile: '',
+  resume: ''
 };
 if (profile){
   newProfile = {
@@ -31,8 +32,9 @@ if (profile){
     workExperience: profile.workExperience,
     country: profile.country,
     location: profile.location,
-    skillSet: profile.skillSet.map(skill => skill.name),
-    linkedinProfile: profile.linkedinProfile
+    skillSet: profile.skillSet.map(skill => skill),
+    linkedinProfile: profile.linkedinProfile,
+    resume: profile.resume
   };
 }
 const initialState: State = {

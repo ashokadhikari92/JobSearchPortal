@@ -1,7 +1,11 @@
-.job-nav{
-   
- background: url("../../../assets/images/logo.png") no-repeat center left;
- 
- margin-bottom: -1px !important;
- padding: 20px !important;
+.job-nav {
+  margin-bottom: -1px !important;
+  padding: 20px !important;
+  background-color: #e5f4f8;
+  height: 75px;
+}
+
+img{
+  height: 60px;
+  width: auto;
 }
